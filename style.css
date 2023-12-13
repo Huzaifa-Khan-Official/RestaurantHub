@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('./Dancing_Script/DancingScript-VariableFont_wght.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* navbar */
+.navbar-brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 32px;
+    color: white;
+}
+
+.nav-Items a {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+}
+
+.nav-List {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}

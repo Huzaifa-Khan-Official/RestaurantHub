@@ -10,27 +10,65 @@
 }
 
 /* navbar */
+.navbar {
+    padding: 20px 40px;
+}
+
 .navbar-brand {
     font-family: 'Dancing Script', cursive;
-    font-size: 32px;
     color: white;
-}
-
-.nav-Items a {
-    text-transform: uppercase;
-    text-decoration: none;
-    color: white;
-}
-
-.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 30px;
 }
 
-.nav-List {
-    list-style-type: none;
-    display: flex;
-    gap: 20px;
+.navbar-brand , .nav-link {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    transition: all .3s;
+}
+
+.navbar-brand{
+    text-transform: capitalize;
+    font-size: 32px;
+}
+
+.nav-item:hover a, .navbar-brand:hover {
+    color: #ffbe33;
+}
+
+.nav-item.active a, .nav-link.active {
+    color: #ffbe33 !important;
+}
+
+@media (max-width: 549px) {
+    .nav-List {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 15px;
+    }
+
+    .navbar {
+        display: block;
+    }
+}
+
+/* end navbar */
+/* banner */
+.coverDiv {
+    background-image: url("./assets/bannerImg.jpg");
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+}
+
+.headingDiv {
+    padding: 65px 30px 
+}
+
+.headingDiv h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 66px;
 }

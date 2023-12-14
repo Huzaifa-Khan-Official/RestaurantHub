@@ -49,6 +49,22 @@ body {
     color: #ffbe33 !important;
 }
 
+.fa-cart-shopping {
+    color: white;
+}
+
+.ordernowBtnDiv {
+    margin: 35px 0;
+}
+
+#ordernowBtn {
+    border: none;
+    background-color: #ffbe33;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 20px;
+}
+
 @media (max-width: 549px) {
     .nav-List {
         flex-direction: column;
@@ -74,6 +90,8 @@ body {
     }
 }
 
+
+
 /* end navbar */
 /* banner */
 .coverDiv {
@@ -83,14 +101,9 @@ body {
     height: 100vh;
     color: white;
 }
+
 .bannerContentDiv {
     padding: 65px 90px;
-    display: inline-flex;
-    flex-direction: row;
-    overflow: hidden;
-    transform: translateX(0vw);
-    transition: transform 0.5s ease-in-out;
-    overflow-x: hidden;
 
 }
 
@@ -99,15 +112,76 @@ body {
     font-size: 66px;
 }
 
-.slider {
-    padding: 0 225px 0 0;
-    width: 70vw;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+.carousel-indicators button {
+    height: 15px !important;
+    width: 15px !important;
+    border-radius: 50%;
+    color: white;
 }
 
-.slider.active {
-    opacity: 1;
+.carousel-indicators {
+    bottom: -80px;
+    justify-content: flex-start;
+}
+
+.carousel-indicators button.active {
+    background-color: #ffbe33;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    margin-top: 45px;
+    border-radius: 5px;
+    padding: 20px 15px;
+    background-color: #222831;
+    color: #ffffff;
+}
+
+.row {
+    justify-content: space-around;
+}
+
+.cardImgDiv {
+    width: 200px;
+    height: 200px;
+}
+
+.cardImgDiv img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid #ffbe33;
+}
+
+.salesDiv {
+    padding: 0 30px;
+}
+
+.cardNameDiv h5 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+    margin: 0;
+}
+
+.cardOFFDiv {
+    margin: 10px 0;
+}
+
+.cardOFFDiv h6 {
+    font-family: 'Dancing Script', cursive;
+}
+
+.cardOFFDiv h6 span {
+    font-size: 36px;
+}
+
+
+
+@media (max-width: 597px) {
+    .carousel-indicators {
+        bottom: 0;
+    }
 }

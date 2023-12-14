@@ -9,9 +9,13 @@
     box-sizing: border-box;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 /* navbar */
 .navbar {
-    padding: 20px 40px;
+    padding: 20px 90px;
 }
 
 .navbar-brand {
@@ -22,23 +26,26 @@
     justify-content: space-between;
 }
 
-.navbar-brand , .nav-link {
+.navbar-brand,
+.nav-link {
     text-transform: uppercase;
     text-decoration: none;
     color: white;
     transition: all .3s;
 }
 
-.navbar-brand{
+.navbar-brand {
     text-transform: capitalize;
     font-size: 32px;
 }
 
-.nav-item:hover a, .navbar-brand:hover {
+.nav-item:hover a,
+.navbar-brand:hover {
     color: #ffbe33;
 }
 
-.nav-item.active a, .nav-link.active {
+.nav-item.active a,
+.nav-link.active {
     color: #ffbe33 !important;
 }
 
@@ -54,6 +61,19 @@
     }
 }
 
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav {
+        flex-direction: row;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbarListDiv {
+        width: 100%;
+    }
+}
+
 /* end navbar */
 /* banner */
 .coverDiv {
@@ -63,12 +83,31 @@
     height: 100vh;
     color: white;
 }
+.bannerContentDiv {
+    padding: 65px 90px;
+    display: inline-flex;
+    flex-direction: row;
+    overflow: hidden;
+    transform: translateX(0vw);
+    transition: transform 0.5s ease-in-out;
+    overflow-x: hidden;
 
-.headingDiv {
-    padding: 65px 30px 
 }
 
 .headingDiv h1 {
     font-family: 'Dancing Script', cursive;
     font-size: 66px;
+}
+
+.slider {
+    padding: 0 225px 0 0;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slider.active {
+    opacity: 1;
 }

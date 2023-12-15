@@ -14,8 +14,51 @@ body {
 }
 
 /* navbar */
+.stickyTopDiv {
+    background-image: linear-gradient(to right, #0D0E10, #364041);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-top: 10px;
+}
+
+.growBusinessDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.growBusinessDiv h6 {
+    padding: 10px 40px;
+    padding-right: 0;
+    text-align: center;
+    color: white;
+}
+
+.crossIconDiv {
+    padding: 0 5px;
+    border-radius: 50%;
+    border: 1px solid white;
+    transition: all .3s;
+    position: absolute;
+    right: 50px;
+}
+
+
+.crossIconDiv i {
+    color: white;
+}
+
+.crossIconDiv:hover {
+    background-color: #e69c00;
+    border: none;
+}
+
 .navbar {
-    padding: 20px 90px;
+    padding: 0 90px;
+
 }
 
 .navbar-brand {
@@ -63,13 +106,18 @@ body {
 }
 
 #ordernowBtn,
-#aboutDivButton {
+#aboutDivButton,
+#registerBtn {
     border: none;
     background-color: #e69d006b;
     color: white;
     padding: 10px 25px;
     border-radius: 20px;
     transition: all .5s;
+}
+
+#registerBtn {
+    padding: 10px 15px;
 }
 
 .nav-item button {
@@ -98,7 +146,8 @@ body {
 #signUpBtn:hover,
 #logInBtn:hover,
 #ordernowBtn:hover,
-#aboutDivButton:hover {
+#aboutDivButton:hover,
+#registerBtn:hover {
     background-color: #e69c00;
 }
 

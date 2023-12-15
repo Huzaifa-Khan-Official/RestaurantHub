@@ -14,3 +14,10 @@ onAuthStateChanged(auth, (user) => {
         location.href = "./user/index.html"
     }
 });
+
+const crossIconDiv = document.querySelector(".crossIconDiv");
+const growBusinessDiv = document.querySelector(".growBusinessDiv");
+
+crossIconDiv.addEventListener("click", () => {
+    growBusinessDiv.style.display = "none";
+});

@@ -1,4 +1,3 @@
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import { app } from "../config.js";
 import {
   getAuth,
@@ -6,13 +5,13 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
-} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 import {
   getFirestore,
   doc,
   setDoc,
-} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();

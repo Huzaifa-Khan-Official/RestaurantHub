@@ -3,23 +3,54 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #4070f4;
+  background-image: url("../assets/signupBackgroundImg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .containerDiv {
-  background-color: white;
   border-radius: 10px;
   padding: 40px 20px;
   width: 400px;
+  color: white;
+  border: 1px solid white;
+  position: relative;
 }
 
-button {
+.containerBlurDiv {
+  position: absolute;
   width: 100%;
-  background-color: #0171d3 !important;
+  height: 100%;
+  background-color: #0000003b;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
+
+#sbtn {
+  width: 100%;
+  background-color: #ffbe33;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 0;
+  transition: all .5s;
+}
+
+#sbtn:hover,
+#googleSignInBtn:hover {
+  background-color: #e69c00;
+
+}
+
+.form-control:focus {
+  box-shadow: 0 0 20px 0px #e69c00;
+}
+
 .form-label span {
   color: red;
 }
+
 #errorPara {
   color: red;
 }
@@ -28,51 +59,48 @@ button {
   text-align: center;
 }
 
+#alreadyAccountPara a {
+  color: white;
+  transition: all .3s;
+}
+
+#alreadyAccountPara a:hover {
+  color: #e69c00;
+}
+
 .hr-text {
   line-height: 1em;
   position: relative;
   outline: 0;
   border: 0;
-  color: black;
+  color: white;
   text-align: center;
   height: 1.5em;
-  opacity: 0.5;
+  opacity: 1;
 
   &:before {
     content: "";
-    /* // use the linear-gradient for the fading effect
-        // use a solid background color for a solid bar */
-    background: linear-gradient(to right, transparent, #000000, transparent);
+    background: linear-gradient(to right, transparent, white, transparent);
     position: absolute;
     left: 0;
     top: 50%;
     width: 100%;
-    height: 1px;
-  }
-
-  &:after {
-    content: attr(data-content);
-    position: relative;
-    display: inline-block;
-    color: black;
-
-    padding: 0 0.5em;
-    line-height: 1.5em;
-    /* // this is really the only tricky part, you need to specify the background color of the container element... */
-    color: #818078;
-    background-color: #fcfcfa;
+    height: 2px;
   }
 }
 
 #googleSignInBtn {
-  background: transparent !important;
+  background-color: #ffbe33;
+  width: 100%;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  border: 1px solid #cdcbcb;
-  padding: 5px 0;
+  padding: 8px 0;
+  border-radius: 10px;
+  transition: all .5s;
+  color: white;
 }
 
 #googleSignInBtn img {

@@ -91,9 +91,12 @@ body {
     background-color: #ffbe33;
 }
 
+#signUpBtn a {
+    color: white;
+}
+
 #signUpBtn:hover, #logInBtn:hover, #ordernowBtn:hover {
     background-color: #e69c00;
-
 }
 
 @media (max-width: 549px) {

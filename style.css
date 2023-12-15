@@ -69,6 +69,7 @@ body {
     color: white;
     padding: 10px 25px;
     border-radius: 20px;
+    transition: all .5s;
 }
 
 .nav-item button {
@@ -90,11 +91,7 @@ body {
     background-color: #ffbe33;
 }
 
-#logInBtn:hover {
-    background-color: #e69c00;
-}
-
-#signUpBtn:hover {
+#signUpBtn:hover, #logInBtn:hover, #ordernowBtn:hover {
     background-color: #e69c00;
 
 }
@@ -245,10 +242,20 @@ body {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     padding: 0;
+    transition: all .3s;
 }
 
 .ourRestCards .card img {
     border-radius: 15px;
+}
+
+.ourRestCards .card:hover {
+    background-color: #bdbdbd4a;
+}
+
+.ourRestCards .card:hover img{
+    transform: scale(1.01);
+    transition: transform 0.3s ease-in-out;
 }
 
 /* aboutDiv */

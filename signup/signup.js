@@ -1,4 +1,5 @@
 import { app } from "../config.js";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -100,8 +101,8 @@ googleSignInBtn.addEventListener("click", () => {
       // The email of the user's account used.
       const email = error.customData.email;
       // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        
+      const credential = GoogleAuthProvider.credentialFromError(error);
+
       if (email) {
         errorPara.innerText = email;
         setTimeout(() => {
@@ -120,5 +121,5 @@ onAuthStateChanged(auth, (user) => {
 });
 
 if (localStorage.getItem("userUid")) {
-  location.href = "../index.html";
+  location.href = "../user/index.html";
 }

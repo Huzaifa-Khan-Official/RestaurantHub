@@ -10,7 +10,9 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
     if (user) {
         const userUid = user.uid;
-        localStorage.setItem("userUid", userUid);
-        location.href = "./user/index.html"
+        localStorage.setItem("userUid", userUid)
+    } else {
+        localStorage.removeItem("userUid");
+        location.href = "../index.html";
     }
 });

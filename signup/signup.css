@@ -30,7 +30,7 @@ body {
 
 #sbtn {
   width: 100%;
-  background-color: #ffbe33;
+  background-color: #e69d006b;
   border: 0;
   border-radius: 10px;
   padding: 10px 0;
@@ -90,7 +90,7 @@ body {
 }
 
 #googleSignInBtn {
-  background-color: #ffbe33;
+  background-color: #e69d006b;
   width: 100%;
   border: none;
   display: flex;

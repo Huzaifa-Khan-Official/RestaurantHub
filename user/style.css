@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Dancing Script';
-    src: url('./Dancing_Script/DancingScript-VariableFont_wght.ttf');
+    src: url('../Dancing_Script/DancingScript-VariableFont_wght.ttf');
 }
 
 * {
@@ -77,35 +77,26 @@ body {
     background: transparent;
 }
 
-#logInBtn {
+#userBtn {
     border: 1px solid #e69d006b;
-    padding: 10px 25px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 50%;
     transition: all .5s;
 }
 
-#signUpBtn {
-    padding: 10px 25px;
-    border-radius: 20px;
-    transition: all .5s;
-    background-color: #e69d006b;
-}
 
-#signUpBtn a {
-    color: white;
-}
-
-#signUpBtn:hover,
-#logInBtn:hover,
+#userBtn:hover,
 #ordernowBtn:hover,
 #aboutDivButton:hover {
     background-color: #e69c00;
 }
 
+
+
 /* end navbar */
 /* banner */
 .coverDiv {
-    background-image: url("./assets/bannerImg.jpg");
+    background-image: url("../assets/bannerImg.jpg");
     background-size: cover;
     width: 100vw;
     height: 100vh;
@@ -192,6 +183,10 @@ body {
 .cardOFFDiv h6 span {
     font-size: 36px;
 }
+
+
+
+
 
 /* ourRestaurent */
 .ourRestHeadDiv h2 {
@@ -325,7 +320,6 @@ body {
     transition: all .3s;
 }
 
-
 @media (max-width: 549px) {
     .nav-List {
         flex-direction: column;
@@ -338,9 +332,15 @@ body {
     }
 }
 
+@media (max-width: 508px) {
+    .headingDiv h1 {
+        font-size: 42px;
+    }
+}
+
 @media (max-width: 650px) {
     .bannerContentDiv {
-        padding-bottom: 0;
+        padding: 0 20px;
     }
 }
 
@@ -354,5 +354,12 @@ body {
 @media (max-width: 992px) {
     .navbarListDiv {
         width: 100%;
+    }
+}
+
+@media (max-width: 330px) {
+    .carousel-indicators {
+        bottom: -30px;
+        left: 20px;
     }
 }

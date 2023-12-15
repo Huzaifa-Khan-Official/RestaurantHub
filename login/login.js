@@ -1,6 +1,7 @@
 import { app } from "../config.js";
 
 import {
+    onAuthStateChanged,
     getAuth,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
@@ -29,7 +30,7 @@ lbtn.addEventListener("click", () => {
         .then((userCredential) => {
             const user = userCredential.user;
             localStorage.setItem("userUid", user.uid)
-            location.href = "../index.html"
+            location.href = "../user/index.html"
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -71,26 +72,24 @@ googleSignInBtn.addEventListener("click", () => {
 
             localStorage.setItem("userUid", user.uid);
 
-            location.href = "../index.html";
+            location.href = "../user/index.html";
         })
         .catch((error) => {
-            // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
-            // The email of the user's account used.
-            // const email = error.customData.email;
-            // The AuthCredential type that was used.
             const credential = GoogleAuthProvider.credentialFromError(error);
             console.log(errorMessage);
-            // if (email) {
-            //     errorPara.innerText = email;
-            //     setTimeout(() => {
-            //         errorPara.innerHTML = "";
-            //     }, 3000);
-            // }
         });
 });
 
 if (localStorage.getItem("userUid")) {
-    location.href = "../index.html"
+    location.href = "../user/index.html"
 }
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        const userUid = user.uid;
+    } else {
+        localStorage.removeItem("userUid");
+    }
+});

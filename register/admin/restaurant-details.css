@@ -1,0 +1,102 @@
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('../../Dancing_Script/DancingScript-VariableFont_wght.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 28.54%, rgba(0, 0, 0, 0) 55.07%), url("../../assets/restaurantDetailsBackgroundImg.webp");
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+}
+
+/* navbar */
+.navbar {
+    padding: 20px 90px;
+}
+
+.navbar-brand {
+    font-family: 'Dancing Script', cursive;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand,
+.nav-link {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    transition: all .3s;
+}
+
+.navbar-brand {
+    text-transform: capitalize;
+    font-size: 32px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item:hover a,
+.navbar-brand:hover {
+    color: #ffbe33;
+}
+
+.nav-item.active a,
+.nav-link.active {
+    color: #ffbe33 !important;
+}
+
+.fa-cart-shopping {
+    color: white;
+}
+
+.ordernowBtnDiv {
+    margin: 35px 0;
+}
+
+#ordernowBtn,
+#aboutDivButton {
+    border: none;
+    background-color: #e69d006b;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 20px;
+    transition: all .5s;
+}
+
+.nav-item button {
+    border: none;
+    background: transparent;
+}
+
+#userBtn {
+    border: 1px solid #e69d006b;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all .5s;
+}
+
+
+#userBtn:hover,
+#ordernowBtn:hover,
+#aboutDivButton:hover {
+    background-color: #e69c00;
+}
+
+
+
+/* end navbar */

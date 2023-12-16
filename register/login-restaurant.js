@@ -62,10 +62,10 @@ googleSignInBtn.addEventListener("click", () => {
             let userData = {
                 sname: user.displayName,
                 semail: user.email,
-                type : "admin"
+                type: "admin"
             };
 
-            await setDoc(doc(db, "restaurants", user.uid), {
+            await setDoc(doc(db, "restaurant admins", user.uid), {
                 // collection name,   unique id of user
                 ...userData, // setting array in a database
                 userid: user.uid, // also user id in the database
@@ -83,9 +83,9 @@ googleSignInBtn.addEventListener("click", () => {
         });
 });
 
-// if (localStorage.getItem("adminUid")) {
-//     location.href = "../user/index.html"
-// }
+if (localStorage.getItem("adminUid")) {
+    location.href = "./admin/admin.html"
+}
 
 // onAuthStateChanged(auth, (user) => {
 //     if (user) {
@@ -94,3 +94,4 @@ googleSignInBtn.addEventListener("click", () => {
 //         localStorage.adminItem("userUid");
 //     }
 // });
+

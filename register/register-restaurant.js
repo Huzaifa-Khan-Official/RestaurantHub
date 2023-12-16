@@ -45,7 +45,7 @@ sbtn.addEventListener("click", () => {
       // email value  , password value
       .then(async (userCredential) => {
         const user = userCredential.user; // getting user from firebase
-        await setDoc(doc(db, "restaurants", user.uid), {
+        await setDoc(doc(db, "restaurant admins", user.uid), {
           // collection name,   unique id of user
           ...userData, // setting array in a database
           userid: user.uid, // also user id in the database
@@ -86,7 +86,7 @@ googleSignInBtn.addEventListener("click", () => {
         type: "admin"
       };
 
-      await setDoc(doc(db, "restaurants", user.uid), {
+      await setDoc(doc(db, "restaurant admins", user.uid), {
         // collection name,   unique id of user
         ...userData, // setting array in a database
         userid: user.uid, // also user id in the database
@@ -122,6 +122,6 @@ googleSignInBtn.addEventListener("click", () => {
 //   }
 // });
 
-// if (localStorage.getItem("adminUid")) {
-//   location.href = "../user/index.html";
-// }
+if (localStorage.getItem("adminUid")) {
+  location.href = "./admin/admin.html";
+}

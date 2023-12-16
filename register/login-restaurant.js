@@ -81,7 +81,7 @@ googleSignInBtn.addEventListener("click", () => {
                 adminUid
             };
 
-            await setDoc(doc(db, "restaurant admins", user.uid), {
+            await setDoc(doc(db, "restaurants", adminUid), {
                 // collection name,   unique id of user
                 ...userData, // setting array in a database
                 adminUid, // also user id in the database

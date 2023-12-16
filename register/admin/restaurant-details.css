@@ -14,9 +14,9 @@ body {
     position: relative;
     background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 28.54%, rgba(0, 0, 0, 0) 55.07%), url("../../assets/restaurantDetailsBackgroundImg.webp");
     background-size: cover;
-    width: 100vw;
-    height: 100vh;
     color: white;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* navbar */
@@ -114,7 +114,8 @@ body {
     width: 100%;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
     box-shadow: 0 0 20px 0px #e69c00;
     border-color: transparent;
 }
@@ -128,12 +129,75 @@ body {
 }
 
 
+.uploadBtnDiv {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    transition: all .3s;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadBtnDiv:hover {
+    background-color: rgba(0, 0, 0, 0.339);
+}
+
+.uploadBtnDiv:hover .fa-camera {
+    display: block;
+}
+
+#picInput {
+    display: none;
+}
+
+#picOutput {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: -100;
+    position: relative;
+}
+
+.fa-camera {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    font-size: larger;
+    transition: all .3s;
+}
+
+.spinner-border {
+    position: absolute;
+    display: none;
+}
+
+.saveBtnDiv {
+    margin: 20px 0;
+}
+
+#saveBtn {
+    border: none;
+    background-color: #e69d006b;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 20px;
+    transition: all .5s;
+}
+
+#saveBtn:hover {
+    background-color: #e69c00;
+}
 
 
 @media (max-width: 320px) {
     .navbar {
         padding: 20px 20px !important;
     }
+
     .restDetFormDiv {
         padding: 20px 20px !important;
     }

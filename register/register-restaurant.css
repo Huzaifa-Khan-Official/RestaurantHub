@@ -53,8 +53,9 @@ body {
 
 }
 
-.form-control:focus {
+.form-control:focus, .form-select:focus {
     box-shadow: 0 0 20px 0px #e69c00;
+    border-color: transparent;
 }
 
 .form-label span {

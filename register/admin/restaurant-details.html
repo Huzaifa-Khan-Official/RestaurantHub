@@ -54,16 +54,22 @@
                 with feane!</h1>
         </div>
         <div class="formDiv">
-            <div class="businessNameDiv">
-                <label class="form-label">Business Name<sup>*</sup></label>
-                <input type="text" class="form-control" placeholder="Business Name">
+            <!-- businessName -->
+            <div class="businessNameDiv inputDiv">
+                <label class="form-label">Business Name <span>*</span></label>
+                <input type="text" class="form-control" placeholder="Enter Your Business Name">
+            </div>
+            <!-- businessEmail -->
+            <div class="businessEmailDiv inputDiv">
+                <label class="form-label">Business Email <span>*</span></label>
+                <input type="email" class="form-control" placeholder="Enter Your Business Email">
             </div>
             <!-- select businessType -->
-            <div class="businessType col-12 col-sm-12 col-md-6 col-lg-5">
-                <label id="formLabel" class="form-lebel">Business Type<sup>*</sup></label>
+            <div class="businessType inputDiv">
+                <label id="formLabel" class="form-label">Business Type <span>*</span></label>
                 <div class="selectInputDiv">
                     <select name="select-businessType" id="select-businessType" class="form-select">
-                        <option value="" disabled selected>Business Type</option>
+                        <option value="" disabled selected>Select Your Business Type</option>
                         <option value="Restaurant">Restaurant</option>
                         <option value="Shop">Shop</option>
                         <option value="Dhabba">Dhabba</option>
@@ -74,12 +80,18 @@
                 </div>
             </div>
             <!-- address -->
-            <div class="addressDiv">
-                <label class="form-label">Address<sup>*</sup></label>
+            <div class="addressDiv inputDiv">
+                <label class="form-label">Address <span>*</span></label>
                 <input type="text" class="form-control" placeholder="Address">
+            </div>
+            <!-- pictureDiv -->
+            <div class="uploadPicDiv">
+                <label class="form-label">Upload Business Image</label>
             </div>
         </div>
     </div>
+    <!-- javaScript Files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -12,6 +12,7 @@ import {
     getFirestore,
     doc,
     setDoc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const auth = getAuth();
@@ -27,10 +28,23 @@ let errorPara = document.querySelector("#errorPara"); // get error paragraph
 lbtn.addEventListener("click", () => {
 
     signInWithEmailAndPassword(auth, lemail.value, lpassword.value)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
             const user = userCredential.user;
+            const adminUid = user.uid;
             localStorage.setItem("adminUid", user.uid)
-            location.href = "./admin/admin.html"
+
+            const docRef = doc(db, "restaurants", adminUid);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                if (docSnap.data().status == false) {
+                    location.href = "./admin/restaurant-details.html"
+                } else {
+                    location.href = "./admin/admin.html"
+                }
+            } else {
+                location.href = "./admin/restaurant-details.html"
+            }
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -58,22 +72,35 @@ googleSignInBtn.addEventListener("click", () => {
             const token = credential.accessToken;
 
             const user = result.user;
+            const adminUid = user.uid;
 
             let userData = {
                 sname: user.displayName,
                 semail: user.email,
-                type: "admin"
+                status: false,
+                adminUid
             };
 
             await setDoc(doc(db, "restaurant admins", user.uid), {
                 // collection name,   unique id of user
                 ...userData, // setting array in a database
-                userid: user.uid, // also user id in the database
+                adminUid, // also user id in the database
             });
 
-            localStorage.setItem("adminUid", user.uid);
+            localStorage.setItem("adminUid", adminUid);
 
-            location.href = "./admin/admin.html";
+            const docRef = doc(db, "restaurants", adminUid);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                if (docSnap.data().status == false) {
+                    location.href = "./admin/restaurant-details.html"
+                } else {
+                    location.href = "./admin/admin.html"
+                }
+            } else {
+                location.href = "./admin/restaurant-details.html"
+            }
         })
         .catch((error) => {
             const errorCode = error.code;

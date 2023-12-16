@@ -13,8 +13,8 @@ import {
 const db = getFirestore(app);
 
 // adding subcollection in a firestore;
-const addDocument = async () => {
-                            // collection name
+const addSubCollection = async () => {
+                        // collection name
     const q = query(collection(db, "cities"));
     const querySnapshot = await getDocs(q);
 

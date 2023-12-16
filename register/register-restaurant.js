@@ -12,6 +12,7 @@ import {
   getFirestore,
   doc,
   setDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const db = getFirestore(app);
@@ -38,18 +39,20 @@ sbtn.addEventListener("click", () => {
       sname: sname.value,
       semail: semail.value,
       spassword: spassword.value,
-      type: "admin"
+      status: false
     };
     // creating user with eamil and password
     createUserWithEmailAndPassword(auth, userData.semail, userData.spassword)
       // email value  , password value
       .then(async (userCredential) => {
         const user = userCredential.user; // getting user from firebase
-        await setDoc(doc(db, "restaurant admins", user.uid), {
+        const adminUid = user.uid;
+        await setDoc(doc(db, "restaurants", user.uid), {
           // collection name,   unique id of user
           ...userData, // setting array in a database
-          userid: user.uid, // also user id in the database
+          adminUid // also admin id in the database
         });
+
         location.href = "./login-restaurant.html";
       })
       .catch((error) => {
@@ -79,22 +82,34 @@ googleSignInBtn.addEventListener("click", () => {
       const token = credential.accessToken;
 
       const user = result.user;
+      const adminUid = user.uid;
 
       let userData = {
         sname: user.displayName,
         semail: user.email,
-        type: "admin"
+        status: false
       };
 
-      await setDoc(doc(db, "restaurant admins", user.uid), {
+      await setDoc(doc(db, "restaurants", user.uid), {
         // collection name,   unique id of user
         ...userData, // setting array in a database
-        userid: user.uid, // also user id in the database
+        adminUid // also admin id in the database
       });
 
-      localStorage.setItem("adminUid", user.uid);
+      localStorage.setItem("adminUid", adminUid);
 
-      location.href = "./admin/admin.html";
+      const docRef = doc(db, "restaurants", adminUid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        if (docSnap.data().status == false) {
+          location.href = "./admin/restaurant-details.html"
+        } else {
+          location.href = "./admin/admin.html"
+        }
+      } else {
+        location.href = "./admin/restaurant-details.html"
+      }
     })
     .catch((error) => {
       // Handle Errors here.

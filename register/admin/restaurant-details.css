@@ -100,3 +100,78 @@ body {
 
 
 /* end navbar */
+/* restDetFormDiv */
+
+.restDetFormDiv {
+    padding: 20px 90px;
+}
+
+.formDiv {
+    width: 500px;
+}
+
+.formDiv .select-businessType {
+    width: 100%;
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 20px 0px #e69c00;
+    border-color: transparent;
+}
+
+.form-label span {
+    color: red;
+}
+
+.inputDiv {
+    margin: 10px 0;
+}
+
+
+
+
+@media (max-width: 320px) {
+    .navbar {
+        padding: 20px 20px !important;
+    }
+    .restDetFormDiv {
+        padding: 20px 20px !important;
+    }
+}
+
+
+@media (max-width: 549px) {
+    .nav-List {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 15px;
+    }
+
+    .navbar {
+        display: block;
+        padding: 20px 50px;
+    }
+
+    .restDetFormDiv {
+        padding: 20px 50px;
+    }
+}
+
+@media (max-width: 650px) {
+    .bannerContentDiv {
+        padding-bottom: 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav {
+        flex-direction: row;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .navbarListDiv {
+        width: 100%;
+    }
+}

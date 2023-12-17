@@ -11,55 +11,29 @@
 
 body {
     overflow-x: hidden;
-}
-
-/* navbar */
-.stickyTopDiv {
-    background-image: linear-gradient(to right, #0D0E10, #364041);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding-top: 10px;
-}
-
-.growBusinessDiv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
     position: relative;
 }
 
-.growBusinessDiv h6 {
-    padding: 10px 40px;
-    padding-right: 0;
-    text-align: center;
+.coverDiv {
+    background-image: url("./assets/adminBackgroundImg.avif");
+    background-size: cover;
+    width: 100vw;
     color: white;
-    margin-bottom: 0;
+    position: relative;
 }
 
-.crossIconDiv {
-    padding: 0 5px;
-    border-radius: 50%;
-    border: 1px solid white;
-    transition: all .3s;
+.coverBackgroundBlurDiv {
     position: absolute;
-    right: 50px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2228319e;
 }
 
-
-.crossIconDiv i {
-    color: white;
-}
-
-.crossIconDiv:hover {
-    background-color: #e69c00;
-    border: none;
-}
-
+/* navbar */
 .navbar {
-    padding: 0 90px;
-
+    padding: 20px 90px;
 }
 
 .navbar-brand {
@@ -102,23 +76,17 @@ body {
     color: white;
 }
 
-.ordernowBtnDiv {
+.cardBtnDiv {
     margin: 35px 0;
 }
 
-#ordernowBtn,
-#aboutDivButton,
-#registerBtn {
+#aboutDivButton {
     border: none;
     background-color: #e69d006b;
     color: white;
-    padding: 10px 25px;
+    padding: 8px 15px;
     border-radius: 20px;
     transition: all .5s;
-}
-
-#registerBtn {
-    padding: 10px 15px;
 }
 
 .nav-item button {
@@ -126,98 +94,36 @@ body {
     background: transparent;
 }
 
-#logInBtn {
+/* #userBtn {
     border: 1px solid #e69d006b;
-    padding: 10px 25px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 50%;
     transition: all .5s;
-}
+} */
 
-#signUpBtn {
-    padding: 10px 25px;
-    border-radius: 20px;
-    transition: all .5s;
-    background-color: #e69d006b;
-}
 
-#signUpBtn a {
-    color: white;
-}
-
-#signUpBtn:hover,
-#logInBtn:hover,
-#ordernowBtn:hover,
-#aboutDivButton:hover,
-#registerBtn:hover {
+#userBtn:hover,
+#aboutDivButton:hover {
     background-color: #e69c00;
 }
 
+
+
 /* end navbar */
-/* banner */
-.coverDiv {
-    position: relative;
-    /* background-image: url("./assets/bannerImg.jpg");
-    background-size: cover;
-    width: 100%;
-    height: 100vh;*/
-    color: white;
-}
-
-.coverBackgroundImgDiv {
-    background-image: url("./assets/bannerImg.jpg");
-    background-size: cover;
-    background-position: center;
-    color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -100;
-}
-
-.bannerContentDiv {
-    padding: 65px 90px;
+/* bannerHeadDiv */
+.bannerHeadDiv {
+    padding: 20px 90px;
+    z-index: 1000;
     position: relative;
 }
 
-.headingDiv h1 {
+.bannerHeadDiv h1 {
+    color: white;
     font-family: 'Dancing Script', cursive;
-    font-size: 66px;
 }
 
-/* .carousel {
-    position: inherit;   
-} */
 
-.carousel-indicators button {
-    height: 15px !important;
-    width: 15px !important;
-    border-radius: 50%;
-    color: white;
-}
 
-.carousel-indicators {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    bottom: 0;
-    left: 20px;
-    z-index: 2;
-    justify-content: left;
-    padding: 0;
-    margin-right: 15%;
-    margin-bottom: 0;
-    margin-left: 15%;
-}
-
-.carousel-indicators button.active {
-    background-color: #ffbe33;
-}
-
-.carousel-item {
-    padding: 0 50px;
-}
 
 .cardDiv .card {
     display: flex;
@@ -229,10 +135,16 @@ body {
     padding: 20px 15px;
     background-color: #222831;
     color: #ffffff;
+    position: relative;
+    justify-content: center;
 }
 
 .row {
     justify-content: space-around;
+}
+
+.cardContentDiv div {
+    margin: 10px 0;
 }
 
 .cardImgDiv {
@@ -242,12 +154,45 @@ body {
 
 .cardImgDiv img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 50%;
     border: 6px solid #ffbe33;
 }
 
-.salesDiv {
+.itemTypeDiv h6 {
+    margin: 0;
+}
+
+.itemTypeDiv {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    background-color: #e69d006b;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all .5s;
+    display: flex;
+    gap: 10px;
+}
+
+.itemTypeDiv p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.itemTypeDiv p i {
+    font-size: 10px !important;
+    color: white;
+}
+
+.itemTypeDiv:hover {
+    background-color: #e69c00;
+}
+
+.itemsDiv {
     padding: 0 30px;
     padding-bottom: 90px;
 }
@@ -256,54 +201,6 @@ body {
     font-family: 'Dancing Script', cursive;
     font-size: 24px;
     margin: 0;
-}
-
-.cardOFFDiv {
-    margin: 10px 0;
-}
-
-.cardOFFDiv h6 {
-    font-family: 'Dancing Script', cursive;
-}
-
-.cardOFFDiv h6 span {
-    font-size: 36px;
-}
-
-/* ourRestaurent */
-.ourRestHeadDiv h2 {
-    font-size: 32px;
-    font-family: 'Dancing Script', cursive;
-    text-align: center;
-}
-
-.ourRestCards {
-    gap: 20px;
-}
-
-.ourRestCardsDiv {
-    padding: 30px 30px;
-}
-
-.ourRestCards .card {
-    border-radius: 10px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    padding: 0;
-    transition: all .3s;
-}
-
-.ourRestCards .card img {
-    border-radius: 15px;
-}
-
-.ourRestCards .card:hover {
-    background-color: #bdbdbd4a;
-}
-
-.ourRestCards .card:hover img {
-    transform: scale(1.01);
-    transition: transform 0.3s ease-in-out;
 }
 
 /* aboutDiv */
@@ -402,7 +299,6 @@ body {
     transition: all .3s;
 }
 
-
 @media (max-width: 549px) {
     .nav-List {
         flex-direction: column;
@@ -415,36 +311,35 @@ body {
     }
 }
 
-@media (max-width: 650px) {
-    .bannerContentDiv {
-        padding: 20px 30px;
-        padding-bottom: 0;
+@media (max-width: 640px) {
+    .itemsDiv {
+        padding: 0 20px;
     }
 }
 
-@media (max-width: 700px) {
-    .growBusinessDiv {
-        justify-content: flex-start;
-    }
 
-    .growBusinessDiv h6 {
-        padding: 10px 20px;
-        padding-right: 0;
-        text-align: center;
-        color: white;
-        width: 300px;
-    }
-}
 
 @media (min-width: 992px) {
     .navbar-expand-lg .navbar-nav {
         flex-direction: row;
         gap: 30px;
     }
+
 }
 
 @media (max-width: 992px) {
     .navbarListDiv {
         width: 100%;
+    }
+
+    .cardDiv .card {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 330px) {
+    .carousel-indicators {
+        bottom: -30px;
+        left: 20px;
     }
 }

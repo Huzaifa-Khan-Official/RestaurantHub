@@ -14,7 +14,15 @@ body {
     position: relative;
 }
 
-.backgroundBlurDiv {
+.coverDiv {
+    background-image: url("../../assets/adminBackgroundImg.avif");
+    background-size: cover;
+    width: 100vw;
+    color: white;
+    position: relative;
+}
+
+.coverBackgroundBlurDiv {
     position: absolute;
     top: 0;
     left: 0;
@@ -104,44 +112,134 @@ body {
 
 
 /* end navbar */
-/* banner */
-.coverDiv {
-    background-image: url("../../assets/adminBackgroundImg.avif");
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
+/* bannerHeadDiv */
+.bannerHeadDiv {
+    padding: 20px 90px;
+    z-index: 1000;
+    position: relative;
+}
+
+.bannerHeadDiv h1 {
     color: white;
-}
-
-.bannerContentDiv {
-    padding: 65px 90px;
-
-}
-
-.headingDiv h1 {
     font-family: 'Dancing Script', cursive;
-    font-size: 66px;
 }
 
-.carousel-indicators button {
-    height: 15px !important;
-    width: 15px !important;
+/* inputDiv */
+
+.addItemFormDiv {
+    max-width: 500px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 20px 0px #e69c00;
+    border-color: transparent;
+}
+
+.form-label span {
+    color: red;
+}
+
+.inputDiv {
+    margin: 10px 0;
+}
+
+.inputDiv p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+/* inputDiv */
+
+/* itemImgDiv */
+.imgInputDiv {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
+    transition: all .3s;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgInputDiv:hover {
+    background-color: rgba(0, 0, 0, 0.339);
+}
+
+.imgInputDiv:hover .fa-camera {
+    display: block;
+}
+
+#imgInput {
+    display: none;
+}
+
+#imgOutput {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: -100;
+    position: relative;
+}
+
+.fa-camera {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    font-size: larger;
+    transition: all .3s;
+}
+
+.imgInputDiv .spinner-border {
+    position: absolute;
+    display: none;
+    color: black;
+}
+
+/* itemImgDiv */
+
+/* itemPriceDiv */
+.itemPriceDiv .form-control,
+.previousPriceDiv .form-control {
+    width: 100px;
+    display: inline-flex;
+    margin: 0 10px;
+}
+
+/* itemPriceDiv */
+
+/* addItemBtnDiv */
+#addItemBtn .spinner-border {
+    display: block;
+    position: relative;
+    width: 20px;
+    height: 20px;
+}
+
+.addItemBtnDiv {
+    margin: 20px 0;
+}
+
+#addItemBtn {
+    border: none;
+    background-color: #e69d006b;
     color: white;
+    padding: 10px 25px;
+    border-radius: 20px;
+    transition: all .5s;
 }
 
-.carousel-indicators {
-    bottom: -80px;
-    justify-content: flex-start;
+#addItemBtn:hover {
+    background-color: #e69c00;
 }
 
-.carousel-indicators button.active {
-    background-color: #ffbe33;
-}
+/* addItemBtnDiv */
 
-.carousel-item {
-    padding: 0 50px;
-}
+/* banner */
+
 
 .cardDiv .card {
     display: flex;
@@ -342,22 +440,15 @@ body {
     }
 }
 
-@media (max-width: 508px) {
-    .headingDiv h1 {
-        font-size: 42px;
-    }
-}
 
-@media (max-width: 650px) {
-    .bannerContentDiv {
-        padding: 0 20px;
-    }
-}
 
 @media (min-width: 992px) {
     .navbar-expand-lg .navbar-nav {
         flex-direction: row;
         gap: 30px;
+    }
+    .cardDiv .card {
+        flex-direction: column;
     }
 }
 

@@ -66,7 +66,7 @@ getData();
 
 const downloadImageUrl = (file) => {
     return new Promise((resolve, reject) => {
-        const restaurantImageRef = ref(storage, `restaurantImages/${adminUid}/${file.name}/`);
+        const restaurantImageRef = ref(storage, `restaurantImages/${adminUid}/${adminUid}.jpg`);
         const uploadTask = uploadBytesResumable(restaurantImageRef, file);
 
         uploadTask.on(
@@ -133,7 +133,11 @@ saveBtn.addEventListener("click", async () => {
     } else {
 
         const restaurantRef = doc(db, "restaurants", adminUid);
-
+        saveBtn.innerHTML = `
+                    <div class="spinner-border saveBtnSpinner" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+        `;
         await updateDoc(restaurantRef, {
             businessName: businessNameValue,
             businessEmail: businessEmailValue,
@@ -142,7 +146,7 @@ saveBtn.addEventListener("click", async () => {
             businessImg: imgUrl,
             status: true
         });
-        console.log("done Hogaya");
+        saveBtn.innerHTML = "Save & Continue"
         location.href = "./admin.html";
     }
 })

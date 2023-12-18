@@ -4,13 +4,18 @@ import {
   getFirestore,
   collection,
   onSnapshot,
-  addDoc,
   query,
   where,
   doc,
+  setDoc,
+  deleteDoc,
+  addDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 const db = getFirestore(app);
+const auth = getAuth();
 
 const restaurantId = localStorage.getItem("selectedRestaurantId");
 if (!restaurantId) {
@@ -18,28 +23,28 @@ if (!restaurantId) {
 }
 
 const userUid = localStorage.getItem("userUid");
-console.log(userUid);
 
 const cardDiv = document.querySelector(".cardDiv");
 const coverDiv = document.querySelector(".coverDiv");
 const bannerHeadingDiv = document.querySelector(".bannerHeadingDiv");
 const cartNoPara = document.querySelector("#cartNo");
 const cartBtn = document.getElementById("cartBtn");
-const cartList = document.querySelector(".cartList")
+const cartList = document.querySelector(".cartList");
+let cartTotalPricePara = document.querySelector(".cartTotalPricePara");
 
 let cartQuant;
 const getCarts = () => {
   onSnapshot(collection(db, `users/${userUid}/cart`), (data) => {
     cartQuant = data.size;
     if (cartQuant) {
-      btn.disabled = false
+      btn.disabled = false;
       cartNoPara.style.display = "flex";
-      cartNoPara.innerHTML = `${cartQuant}`
+      cartNoPara.innerHTML = `${cartQuant}`;
     } else {
       cartNoPara.style.display = "none";
     }
-  })
-}
+  });
+};
 
 getCarts();
 
@@ -47,7 +52,7 @@ const getRestaurantDetails = async (restaurantId) => {
   const restRef = doc(db, "restaurants", restaurantId);
 
   onSnapshot(restRef, (docSnapshot) => {
-    if ((docSnapshot.exists()) && (docSnapshot.data().status)) {
+    if (docSnapshot.exists() && docSnapshot.data().status) {
       const businessimg = docSnapshot.data().businessImg;
       const businessName = docSnapshot.data().businessName;
       const businesstype = docSnapshot.data().BusinessType;
@@ -101,7 +106,7 @@ const getItems = async () => {
           strikePrice = ``;
         }
         cardDiv.innerHTML += `
-                <div class="card col-lg-5 col-md-5 col-sm-5 col-12" id="${itemId}" onclick ="addToCart('${itemName}', '${itemPrice}')">
+                <div class="card col-lg-5 col-md-5 col-sm-5 col-12" id="${itemId}" onclick ="addToCart('${itemId}', '${itemName}', '${itemPrice}', '${itemImg}')">
                     <div class="cardImgDiv">
                         <img src="${itemImg}" alt="">
                     </div>
@@ -141,15 +146,14 @@ window.addToCart = () => {
   });
 };
 
-
-window.addToCart = async (itemName, itemPrice) => {
-  console.log(itemName, itemPrice);
-
+window.addToCart = async (itemId, itemName, itemPrice, itemImg) => {
   try {
     let singleProduct = {
+      itemId,
+      itemImg,
       itemName,
-      itemPrice
-    }
+      itemPrice,
+    };
 
     await addDoc(collection(db, `users/${userUid}/cart`), {
       ...singleProduct,
@@ -157,28 +161,28 @@ window.addToCart = async (itemName, itemPrice) => {
   } catch (e) {
     console.error("Error adding document: ", e);
   }
-}
-
+};
 
 cartBtn.addEventListener("click", () => {
-
   cartList.innerHTML = "";
   let cartTotalPrice = 0;
 
   onSnapshot(collection(db, `users/${userUid}/cart`), (data) => {
     cartQuant = data.size;
     if (cartQuant) {
-      btn.disabled = false
+      btn.disabled = false;
       data.docChanges().forEach((singleCartProduct) => {
-        const cartProductPrice = +singleCartProduct.doc.data().productPrice;
+        const cartProductPrice = +singleCartProduct.doc.data().itemPrice;
         if (singleCartProduct.type === "added") {
-          const cartProductId = singleCartProduct.doc.data().productId;
-          const cartProductImg = singleCartProduct.doc.data().productImg;
-          const cartProductTitle = singleCartProduct.doc.data().productTitle;
+          const cartProductId = singleCartProduct.doc.data().itemId;
+          const cartProductImg = singleCartProduct.doc.data().itemImg;
+          const cartProductTitle = singleCartProduct.doc.data().itemName;
           cartTotalPrice += cartProductPrice;
 
           cartList.innerHTML += `
-                    <li class="cartProductList mt-3" id="${singleCartProduct.doc.id}">
+                    <li class="cartProductList mt-3" id="${
+                      singleCartProduct.doc.id
+                    }">
                         <div class="cartProductDetailDiv">
                             <p><i class="fa-regular fa-circle" style="color: #4B1EB1;"></i></p>
                             <div class="cartProductImgDiv">
@@ -189,25 +193,42 @@ cartBtn.addEventListener("click", () => {
                             </div>
                         </div>
                         <div class="cartProductPrice">
-                            <p id="cartProductPricePara">$${cartProductPrice.toFixed(2)}</p>
-                            <p id="xMark" onclick="delCartProduct('${singleCartProduct.doc.id}')"><i class="fa-solid fa-xmark fa-lg" style="color: #f55555;"></i></p>
+                            <p id="cartProductPricePara">$${cartProductPrice.toFixed(
+                              2
+                            )}</p>
+                            <p id="xMark" onclick="delCartProduct('${
+                              singleCartProduct.doc.id
+                            }')"><i class="fa-solid fa-xmark fa-lg" style="color: #f55555;"></i></p>
                         </div>
                     </li>
-                    `
-
+                    `;
         } else if (singleCartProduct.type === "removed") {
-          let delLi = document.getElementById(singleCartProduct.doc.id)
+          let delLi = document.getElementById(singleCartProduct.doc.id);
           if (delLi) {
-            delLi.remove()
+            delLi.remove();
           }
           cartTotalPrice -= cartProductPrice;
         }
-        cartTotalPricePara.innerHTML = `$${cartTotalPrice.toFixed(2)}`
-      })
+        cartTotalPricePara.innerHTML = `$${cartTotalPrice.toFixed(2)}`;
+      });
     } else {
-      $('#addChartCanvas').offcanvas('hide');
+      $("#addChartCanvas").offcanvas("hide");
       btn.disabled = true;
     }
-  })
+  });
+});
 
-})
+const LogOutBtn = document.querySelector("#LogOutBtn");
+
+LogOutBtn.addEventListener("click", () => {
+  auth.signOut().then(() => {
+    localStorage.removeItem("userUid");
+    location.href = "../index.html";
+  });
+});
+
+
+
+window.delCartProduct = async (id) => {
+  await deleteDoc(doc(db, `users/${userUid}/cart/`, id));
+}

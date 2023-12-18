@@ -63,7 +63,8 @@ body {
 }
 
 #ordernowBtn,
-#aboutDivButton {
+#aboutDivButton,
+#LogOutBtn {
     border: none;
     background-color: #e69d006b;
     color: white;
@@ -85,9 +86,12 @@ body {
 }
 
 
+
+
 #userBtn:hover,
 #ordernowBtn:hover,
-#aboutDivButton:hover {
+#aboutDivButton:hover,
+#LogOutBtn:hover {
     background-color: #e69c00;
 }
 

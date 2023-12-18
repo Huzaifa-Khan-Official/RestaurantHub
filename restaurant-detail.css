@@ -15,9 +15,11 @@ body {
 }
 
 .coverDiv {
-    background-image: url("./assets/adminBackgroundImg.avif");
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100vw;
+    height: 500px;
     color: white;
     position: relative;
 }
@@ -76,6 +78,29 @@ body {
     color: white;
 }
 
+#logInBtn {
+    border: 1px solid #e69d006b;
+    padding: 10px 25px;
+    border-radius: 20px;
+    transition: all .5s;
+}
+
+#signUpBtn {
+    padding: 10px 25px;
+    border-radius: 20px;
+    transition: all .5s;
+    background-color: #e69d006b;
+}
+
+#signUpBtn a {
+    color: white;
+}
+
+#signUpBtn:hover,
+#logInBtn:hover {
+    background-color: #e69c00;
+}
+
 .cardBtnDiv {
     margin: 35px 0;
 }
@@ -111,13 +136,14 @@ body {
 
 /* end navbar */
 /* bannerHeadDiv */
-.bannerHeadDiv {
+.bannerHeadingDiv {
     padding: 20px 90px;
-    z-index: 1000;
-    position: relative;
+    position: absolute;
+    top: 50%;
 }
 
-.bannerHeadDiv h1 {
+.bannerHeadingDiv h1 {
+    font-size: 76px;
     color: white;
     font-family: 'Dancing Script', cursive;
 }
@@ -137,6 +163,26 @@ body {
     color: #ffffff;
     position: relative;
     justify-content: center;
+    transition: all .5s;
+}
+
+.addToCart {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    padding: 5px;
+    border-radius: 50%;
+    border: 1px solid white;
+    transition: all .5s;
+}
+
+.cardDiv .card:hover {
+    transform: scale(1.05);
+}
+
+.cardDiv .card:hover .addToCart {
+    background-color: #e69c00;
+    border: 1px solid #e69c00;
 }
 
 .row {
@@ -194,7 +240,7 @@ body {
 
 .itemsDiv {
     padding: 0 30px;
-    padding-bottom: 90px;
+    padding-bottom: 30px;
 }
 
 .cardNameDiv h5 {
@@ -202,6 +248,16 @@ body {
     font-size: 24px;
     margin: 0;
 }
+
+.itemPriceDivOutput {
+    display: flex;
+    gap: 10px;
+}
+
+.itemPriceDivOutput s {
+    opacity: 0.7;
+}
+
 
 /* aboutDiv */
 .aboutDiv {

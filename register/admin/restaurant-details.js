@@ -133,7 +133,6 @@ saveBtn.addEventListener("click", async () => {
         location.href = "#picInput"
     } else {
 
-        // const restaurantRef = doc(db, `restaurants/${adminUid}`);
         const restaurantRef = doc(db, "restaurants", adminUid);
         saveBtn.innerHTML = `
                     <div class="spinner-border saveBtnSpinner" role="status">

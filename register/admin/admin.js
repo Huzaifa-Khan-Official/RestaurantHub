@@ -8,6 +8,7 @@ import {
   doc,
   query,
   deleteDoc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 import {
@@ -205,6 +206,54 @@ const getItems = () => {
                     </div>
                 </div>
                 `;
+      } else if (singleItem.type === "modified") {
+        $('#editItemModal').modal('hide');
+        let uItem = document.getElementById(singleItem.doc.id);
+        const itemId = singleItem.doc.id;
+        const itemImg = singleItem.doc.data().itemImg;
+        const itemName = singleItem.doc.data().itemName;
+        const itemDesc = singleItem.doc.data().itemDesc;
+        const itemPrice = singleItem.doc.data().itemPrice;
+        const itemType = singleItem.doc.data().itemType;
+        const prevPrice = singleItem.doc.data().prevPrice;
+        let strikePrice;
+        if (prevPrice) {
+          strikePrice = `
+                    <s><h6>Rs. ${prevPrice}</h6></s>
+                    `;
+        } else {
+          strikePrice = ``;
+        }
+        uItem.setAttribute("id", itemId);
+        uItem.innerHTML = `
+                    <div class="cardImgDiv">
+                        <img src="${itemImg}" alt="">
+                    </div>
+                    <div class="cardContentDiv">
+                        <div class="cardNameDiv">
+                            <h5>${itemName}</h5>
+                        </div>
+                        <div class="cardNameDiv">
+                            <h5>${itemDesc}</h5>
+                        </div>
+                        <div class="itemPriceDivOutput">
+                            <h6>Rs. ${itemPrice}</h6>
+
+                            ${strikePrice}
+                        </div>
+                        <div class="itemTypeDiv">
+                            <p><i class="fa-solid fa-circle"></i> </p><h6>${itemType}</h6>
+                        </div>
+
+                        <div class="cardBtnDiv">
+                            <button id="editItemBtn" data-bs-toggle="modal" data-bs-target="#editItemModal" onclick="editItem(this, '${itemId}')">Edit Item <i class="fa-solid fa-pen-to-square"></i></button>
+                        </div>
+
+                        <div class="cardBtnDiv">
+                            <button id="delBtn" onclick="delBtnFunction('${itemId}')">Delete Item <i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
       }
     });
   });
@@ -216,8 +265,6 @@ async function delBtnFunction(id) {
   await deleteDoc(doc(db, `restaurants/${adminUid}/menue`, id));
 }
 
-let updateLi;
-let updateLiId;
 
 const EditimgOutput = document.querySelector("#EditimgOutput");
 const EditItemName = document.querySelector("#EditItemName");
@@ -226,9 +273,11 @@ const EditItemType = document.querySelector("#EditItemType");
 const editItemPrice = document.querySelector("#editItemPrice");
 const editPrevItemPrice = document.querySelector("#editPrevItemPrice");
 
+
+let updateItemId;
 async function editItem(e, id) {
   const restRef = doc(db, `restaurants/${adminUid}/menue`, id);
-
+  updateItemId = id;
   onSnapshot(restRef, (selectItem) => {
     if (selectItem.exists()) {
       const itemImg = selectItem.data().itemImg;
@@ -247,6 +296,36 @@ async function editItem(e, id) {
     }
   });
 }
+
+const editItemFunction = document.querySelector("#editItemfunction");
+editItemFunction.addEventListener("click", async () => {
+  // console.log(updateItemId);
+  const updatedImg = EditimgOutput.value;
+  const updatedItemName = EditItemName.value;
+  const updatedItemDesc = EdititemDesc.value;
+  const updatedItemType = EditItemType.value;
+  const updatedItemPrice = editItemPrice.value;
+  const updatedItemPrevPrice = editPrevItemPrice.value;
+
+  const itemRef = doc(db, `restaurants/${adminUid}/menue`, updateItemId);
+  let prevPrice;
+  if (updatedItemPrevPrice) {
+    prevPrice = updatedItemPrevPrice;
+  } else {
+    prevPrice = "";
+  }
+
+  const itemDetail = {
+    itemName: updatedItemName,
+    itemDesc: updatedItemDesc,
+    itemType: updatedItemType,
+    itemPrice: updatedItemPrice,
+    prevPrice,
+  };
+  await updateDoc(itemRef, {
+    ...itemDetail
+  });
+})
 
 window.delBtnFunction = delBtnFunction;
 window.editItem = editItem;

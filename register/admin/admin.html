@@ -146,6 +146,73 @@
         </div>
     </div>
 
+    <!-- editItemModal -->
+    <div class="modal fade" id="editItemModal" tabindex="-1" aria-labelledby="editItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editItemModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- itemImgDiv -->
+                    <div class="itemImgDiv">
+                        <label class="form-label">Item Image <span>*</span></label>
+                        <div class="imgInputDiv">
+                            <img src="" alt="" id="EditimgOutput">
+                            <input type="file" accept="image/*" id="imgInput">
+                            <i class="fa-solid fa-camera" style="color: #ffffff;"></i>
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- itemTitleDiv -->
+                    <div class="itemTitleDiv inputDiv">
+                        <label class="form-label">Item Name <span>*</span></label>
+                        <input type="text" class="form-control" placeholder="Enter Item Name" id="EditItemName">
+                    </div>
+                    <!-- itemDescDiv -->
+                    <div class="itemDescDiv inputDiv">
+                        <label class="form-label">Item Description <span>*</span></label>
+                        <input type="text" class="form-control" placeholder="Enter Item Description" id="EdititemDesc"
+                            maxlength="120">
+                        <p class="note">Note: Enter Description within "120" words</p>
+                    </div>
+                    <!-- select ItemType -->
+                    <div class="ItemType inputDiv">
+                        <label class="form-label">Item Type <span>*</span></label>
+                        <div class="selectInputDiv">
+                            <select name="EditItemType" id="EditItemType" class="form-select">
+                                <option value="" disabled selected>Select Item Type</option>
+                                <option value="Fast Food">Fast Food</option>
+                                <option value="BBQ">BBQ</option>
+                                <option value="Casual">Casual</option>
+                                <option value="Tea & Coffee">Tea & Coffee</option>
+                                <option value="Chinese">Chinese</option>
+                                <option value="Pakistani">Pakistani</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- itemPriceDiv -->
+                    <div class="itemPriceDiv">
+                        <label class="form-label">Item Price <span>*</span></label>
+                        <p>Rs. <input type="number" class="form-control" id="editItemPrice" placeholder="00.00"></p>
+                    </div>
+                    <!-- previousPriceDiv -->
+                    <div class="previousPriceDiv">
+                        <label class="form-label">Previous Price (Optional)</label>
+                        <p>Rs. <input type="number" class="form-control" id="editPrevItemPrice" placeholder="00.00"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- footer -->
     <div class="footerDiv">

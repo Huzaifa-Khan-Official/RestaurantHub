@@ -35,21 +35,21 @@ sbtn.addEventListener("click", () => {
     }, 3000);
   } else {
     // storing data in a array
-    let userData = {
+    let adminData = {
       sname: sname.value,
       semail: semail.value,
       spassword: spassword.value,
       status: false
     };
     // creating user with eamil and password
-    createUserWithEmailAndPassword(auth, userData.semail, userData.spassword)
+    createUserWithEmailAndPassword(auth, adminData.semail, adminData.spassword)
       // email value  , password value
       .then(async (userCredential) => {
         const user = userCredential.user; // getting user from firebase
         const adminUid = user.uid;
         await setDoc(doc(db, "restaurants", user.uid), {
           // collection name,   unique id of user
-          ...userData, // setting array in a database
+          ...adminData, // setting array in a database
           adminUid // also admin id in the database
         });
 
@@ -84,7 +84,7 @@ googleSignInBtn.addEventListener("click", () => {
       const user = result.user;
       const adminUid = user.uid;
 
-      let userData = {
+      let adminData = {
         sname: user.displayName,
         semail: user.email,
         status: false
@@ -92,7 +92,7 @@ googleSignInBtn.addEventListener("click", () => {
 
       await setDoc(doc(db, "restaurants", user.uid), {
         // collection name,   unique id of user
-        ...userData, // setting array in a database
+        ...adminData, // setting array in a database
         adminUid // also admin id in the database
       });
 

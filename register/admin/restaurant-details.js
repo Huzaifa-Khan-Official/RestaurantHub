@@ -1,5 +1,4 @@
 import { app } from "../../config.js";
-
 import {
     getFirestore,
     getDoc,
@@ -13,12 +12,18 @@ import {
     uploadBytesResumable,
     getDownloadURL
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
 import {
     getAuth,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const auth = getAuth();
+const db = getFirestore(app);
+
+// Initialize Cloud Storage and get a reference to the service
+const storage = getStorage();
+
 let adminUid;
 
 onAuthStateChanged(auth, (user) => {
@@ -31,9 +36,6 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-const db = getFirestore(app);
-// Initialize Cloud Storage and get a reference to the service
-const storage = getStorage();
 
 const uploadBtnDiv = document.querySelector(".uploadBtnDiv");
 const picInput = document.querySelector("#picInput");
@@ -47,22 +49,21 @@ const businessAddress = document.querySelector("#businessAddress");
 let imgUrl;
 
 
-const getData = async () => {
+// const getData = async () => {
+//     const docRef = doc(db, "restaurants", localStorage.getItem("adminUid"));
+//     const docSnap = await getDoc(docRef);
 
-    const docRef = doc(db, "restaurants", localStorage.getItem("adminUid"));
-    const docSnap = await getDoc(docRef);
+//     if (docSnap.data().status == false) {
+//         selectBusinessType.value = docSnap.data().BusinessType;
+//         businessAddress.value = docSnap.data().businessAddress;
+//         businessEmail.value = docSnap.data().businessEmail;
+//         picOutput.src = docSnap.data().businessImg;
+//         imgUrl = docSnap.data().businessImg;
+//         businessName.value = docSnap.data().businessName;
+//     }
+// }
 
-    if (docSnap.exists()) {
-        selectBusinessType.value = docSnap.data().BusinessType;
-        businessAddress.value = docSnap.data().businessAddress;
-        businessEmail.value = docSnap.data().businessEmail;
-        picOutput.src = docSnap.data().businessImg;
-        imgUrl = docSnap.data().businessImg;
-        businessName.value = docSnap.data().businessName;
-    }
-}
-
-getData();
+// getData();
 
 const downloadImageUrl = (file) => {
     return new Promise((resolve, reject) => {
@@ -132,6 +133,7 @@ saveBtn.addEventListener("click", async () => {
         location.href = "#picInput"
     } else {
 
+        // const restaurantRef = doc(db, `restaurants/${adminUid}`);
         const restaurantRef = doc(db, "restaurants", adminUid);
         saveBtn.innerHTML = `
                     <div class="spinner-border saveBtnSpinner" role="status">

@@ -74,7 +74,7 @@ googleSignInBtn.addEventListener("click", () => {
             const user = result.user;
             const adminUid = user.uid;
 
-            let userData = {
+            let adminData = {
                 sname: user.displayName,
                 semail: user.email,
                 status: false,
@@ -83,7 +83,7 @@ googleSignInBtn.addEventListener("click", () => {
 
             await setDoc(doc(db, "restaurants", adminUid), {
                 // collection name,   unique id of user
-                ...userData, // setting array in a database
+                ...adminData, // setting array in a database
                 adminUid, // also user id in the database
             });
 

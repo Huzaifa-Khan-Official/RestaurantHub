@@ -177,7 +177,7 @@ body {
     display: none;
 }
 
-#imgOutput {
+#imgOutput, #EditimgOutput {
     width: 100%;
     height: 100%;
     border-radius: 50%;
@@ -199,6 +199,10 @@ body {
     position: absolute;
     display: none;
     color: black;
+}
+
+#EditimgOutput {
+    z-index: 1;
 }
 
 /* itemImgDiv */

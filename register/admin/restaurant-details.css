@@ -200,6 +200,19 @@ body {
 }
 
 
+@media (max-width: 190px) {
+    .uploadBtnDiv {
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
+@media (max-width: 200px) {
+    .navbar>.container-fluid {
+        justify-content: center;
+    }
+}
+
 @media (max-width: 320px) {
     .navbar {
         padding: 20px 20px !important;
@@ -231,6 +244,19 @@ body {
 @media (max-width: 650px) {
     .bannerContentDiv {
         padding-bottom: 0;
+    }
+
+    .navbar {
+        display: block;
+        padding: 20px 20px;
+    }
+
+    .formDiv {
+        width: 100%;
+    }
+
+    .restDetFormDiv {
+        padding: 20px 30px;
     }
 }
 

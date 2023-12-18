@@ -436,6 +436,50 @@ body {
     transition: all .3s;
 }
 
+@media (max-width: 200px) {
+    .navbar>.container-fluid {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 220px) {
+    .itemPriceDiv .form-control, .previousPriceDiv .form-control {
+        width: 100px;
+        display: block;
+        margin: 10px 0;
+    }
+
+    .imgInputDiv, .cardImgDiv {
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
+@media (max-width: 280px) {
+    .cardImgDiv {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 300px) {
+    .cardDiv {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cardDiv .card {
+        padding: 20px 15px;
+        padding-top: 63px;
+    }
+
+    .cardDiv {
+        padding: 0 20px;
+    }
+
+}
+
 @media (max-width: 549px) {
     .nav-List {
         flex-direction: column;
@@ -451,6 +495,15 @@ body {
 @media (max-width: 640px) {
     .itemsDiv {
         padding: 0 20px;
+    }
+
+    .navbar {
+        display: block;
+        padding: 20px 20px;
+    }
+
+    .bannerHeadDiv {
+        padding: 20px 30px;
     }
 }
 

@@ -49,21 +49,21 @@ const businessAddress = document.querySelector("#businessAddress");
 let imgUrl;
 
 
-// const getData = async () => {
-//     const docRef = doc(db, "restaurants", localStorage.getItem("adminUid"));
-//     const docSnap = await getDoc(docRef);
+const getData = async () => {
+    const docRef = doc(db, "restaurants", localStorage.getItem("adminUid"));
+    const docSnap = await getDoc(docRef);
 
-//     if (docSnap.data().status == false) {
-//         selectBusinessType.value = docSnap.data().BusinessType;
-//         businessAddress.value = docSnap.data().businessAddress;
-//         businessEmail.value = docSnap.data().businessEmail;
-//         picOutput.src = docSnap.data().businessImg;
-//         imgUrl = docSnap.data().businessImg;
-//         businessName.value = docSnap.data().businessName;
-//     }
-// }
+    if (docSnap.data().status) {
+        selectBusinessType.value = docSnap.data().BusinessType;
+        businessAddress.value = docSnap.data().businessAddress;
+        businessEmail.value = docSnap.data().businessEmail;
+        picOutput.src = docSnap.data().businessImg;
+        imgUrl = docSnap.data().businessImg;
+        businessName.value = docSnap.data().businessName;
+    }
+}
 
-// getData();
+getData();
 
 const downloadImageUrl = (file) => {
     return new Promise((resolve, reject) => {

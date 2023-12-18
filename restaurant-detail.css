@@ -119,15 +119,6 @@ body {
     background: transparent;
 }
 
-/* #userBtn {
-    border: 1px solid #e69d006b;
-    padding: 10px;
-    border-radius: 50%;
-    transition: all .5s;
-} */
-
-
-#userBtn:hover,
 #aboutDivButton:hover {
     background-color: #e69c00;
 }

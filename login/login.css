@@ -2,7 +2,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-image: url("../assets/signupBackgroundImg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -107,7 +106,14 @@ body {
     width: 35px;
 }
 
-@media (max-width: 330px) {
+
+@media (max-width: 260px) {
+    #googleSignInBtn {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 430px) {
     body {
         padding: 20px;
     }

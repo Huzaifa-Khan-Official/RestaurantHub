@@ -402,6 +402,32 @@ body {
     transition: all .3s;
 }
 
+@media (max-width: 240px) {
+    .headingDiv h1 {
+        font-size: 30px !important;
+    }
+}
+
+@media (max-width: 260px) {
+    .cardImgDiv {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 370px) {
+    .headingDiv h1 {
+        font-size: 44px;
+    }
+
+    .carousel-item {
+        padding: 0;
+    }
+
+    .cardDiv .card {
+        flex-direction: column;
+    }
+}
 
 @media (max-width: 549px) {
     .nav-List {
@@ -412,6 +438,16 @@ body {
 
     .navbar {
         display: block;
+        padding: 0 20px;
+    }
+
+    .crossIconDiv {
+        position: initial;
+    }
+
+    .growBusinessDiv {
+        justify-content: center !important;
+        flex-wrap: wrap;
     }
 }
 

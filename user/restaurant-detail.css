@@ -172,7 +172,7 @@ body {
     flex-wrap: nowrap;
 }
 
-#xMark i:hover{
+#xMark i:hover {
     cursor: pointer;
     color: #d02c2c !important;
     transform: scale(1.2);
@@ -181,6 +181,7 @@ body {
 .cartLi {
     position: relative;
 }
+
 .cartLi:hover i {
     transition: all .5s;
     color: #e69c00;
@@ -425,6 +426,53 @@ body {
     transition: all .3s;
 }
 
+@media (max-width: 190px) {
+    .cardImgDiv {
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
+@media (max-width: 200px) {
+    .navbar>.container-fluid {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 240px) {
+    .headingDiv h1 {
+        font-size: 30px !important;
+    }
+
+    .itemPriceDivOutput {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 290px) {
+    .cardImgDiv {
+        width: 150px;
+        height: 150px;
+    }
+
+    .cardDiv {
+        padding: 0 !important;
+    }
+}
+
+@media (max-width: 370px) {
+    .headingDiv h1 {
+        font-size: 44px;
+    }
+}
+
+@media (max-width: 500px) {
+    .cardDiv .card {
+        padding: 20px 15px;
+        padding-top: 63px;
+    }
+}
+
 @media (max-width: 549px) {
     .nav-List {
         flex-direction: column;
@@ -432,14 +480,25 @@ body {
         padding-left: 15px;
     }
 
-    .navbar {
-        display: block;
+    .bannerHeadingDiv {
+        padding: 20px 20px;
+        position: absolute;
+        top: 20%;
+    }
+
+    .cardDiv {
+        padding: 0 20px;
     }
 }
 
 @media (max-width: 640px) {
     .itemsDiv {
         padding: 0 20px;
+    }
+
+    .navbar {
+        display: block;
+        padding: 20px 20px;
     }
 }
 

@@ -24,7 +24,7 @@ const getRestaurantDetails = async (restaurantId) => {
   const restRef = doc(db, "restaurants", restaurantId);
 
   onSnapshot(restRef, (docSnapshot) => {
-    if (docSnapshot.exists()) {
+    if ((docSnapshot.exists()) && (docSnapshot.data().status)) {
       const businessimg = docSnapshot.data().businessImg;
       const businessName = docSnapshot.data().businessName;
       const businesstype = docSnapshot.data().BusinessType;

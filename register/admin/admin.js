@@ -18,9 +18,15 @@ import {
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
+import {
+  getAuth
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
 const db = getFirestore(app);
 // Initialize Cloud Storage and get a reference to the service
 const storage = getStorage();
+const auth = getAuth();
+
 
 const adminUid = localStorage.getItem("adminUid");
 
@@ -325,6 +331,16 @@ editItemFunction.addEventListener("click", async () => {
   await updateDoc(itemRef, {
     ...itemDetail
   });
+})
+
+
+const LogOutBtn = document.querySelector("#LogOutBtn");
+
+LogOutBtn.addEventListener("click", () => {
+  auth.signOut().then(() => {
+    localStorage.removeItem("userUid");
+    location.href = "../../index.html";
+  })
 })
 
 window.delBtnFunction = delBtnFunction;

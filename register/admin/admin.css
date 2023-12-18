@@ -82,7 +82,8 @@ body {
 
 #editItemBtn,
 #aboutDivButton,
-#delBtn {
+#delBtn,
+#LogOutBtn {
     border: none;
     background-color: #e69d006b;
     color: white;
@@ -107,7 +108,8 @@ body {
 #userBtn:hover,
 #editItemBtn:hover,
 #aboutDivButton:hover,
-#delBtn:hover {
+#delBtn:hover,
+#LogOutBtn:hover {
     background-color: #e69c00;
 }
 

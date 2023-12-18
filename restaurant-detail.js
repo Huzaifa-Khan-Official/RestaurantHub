@@ -28,6 +28,7 @@ const getRestaurantDetails = async (restaurantId) => {
       const businessimg = docSnapshot.data().businessImg;
       const businessName = docSnapshot.data().businessName;
       const businesstype = docSnapshot.data().BusinessType;
+      const businessAddress = docSnapshot.data().businessAddress;
 
       coverDiv.style.backgroundImage = `url('${businessimg}')`;
 
@@ -38,8 +39,10 @@ const getRestaurantDetails = async (restaurantId) => {
         <div class="BusinessTypeDiv">
             <h3>${businesstype}</h3>
         </div>
+        <div class="BusinessAddressDiv">
+            <p>${businessAddress}</p>
+        </div>
         `;
-      console.log(docSnapshot.data());
     } else {
       console.log("No such document!");
     }

@@ -4,6 +4,7 @@ import {
   getFirestore,
   collection,
   onSnapshot,
+  addDoc,
   query,
   where,
   doc,
@@ -16,9 +17,31 @@ if (!restaurantId) {
   location.href = "./index.html";
 }
 
+const userUid = localStorage.getItem("userUid");
+console.log(userUid);
+
 const cardDiv = document.querySelector(".cardDiv");
 const coverDiv = document.querySelector(".coverDiv");
 const bannerHeadingDiv = document.querySelector(".bannerHeadingDiv");
+const cartNoPara = document.querySelector("#cartNo");
+const cartBtn = document.getElementById("cartBtn");
+const cartList = document.querySelector(".cartList")
+
+let cartQuant;
+const getCarts = () => {
+  onSnapshot(collection(db, `users/${userUid}/cart`), (data) => {
+    cartQuant = data.size;
+    if (cartQuant) {
+      btn.disabled = false
+      cartNoPara.style.display = "flex";
+      cartNoPara.innerHTML = `${cartQuant}`
+    } else {
+      cartNoPara.style.display = "none";
+    }
+  })
+}
+
+getCarts();
 
 const getRestaurantDetails = async (restaurantId) => {
   const restRef = doc(db, "restaurants", restaurantId);
@@ -78,7 +101,7 @@ const getItems = async () => {
           strikePrice = ``;
         }
         cardDiv.innerHTML += `
-                <div class="card col-lg-5 col-md-5 col-sm-5 col-12" id="${itemId}" onclick ="addToCart()">
+                <div class="card col-lg-5 col-md-5 col-sm-5 col-12" id="${itemId}" onclick ="addToCart('${itemName}', '${itemPrice}')">
                     <div class="cardImgDiv">
                         <img src="${itemImg}" alt="">
                     </div>
@@ -117,3 +140,74 @@ window.addToCart = () => {
     text: `Please Sign In First To Add Item To Your Cart!`,
   });
 };
+
+
+window.addToCart = async (itemName, itemPrice) => {
+  console.log(itemName, itemPrice);
+
+  try {
+    let singleProduct = {
+      itemName,
+      itemPrice
+    }
+
+    await addDoc(collection(db, `users/${userUid}/cart`), {
+      ...singleProduct,
+    });
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+}
+
+
+cartBtn.addEventListener("click", () => {
+
+  cartList.innerHTML = "";
+  let cartTotalPrice = 0;
+
+  onSnapshot(collection(db, `users/${userUid}/cart`), (data) => {
+    cartQuant = data.size;
+    if (cartQuant) {
+      btn.disabled = false
+      data.docChanges().forEach((singleCartProduct) => {
+        const cartProductPrice = +singleCartProduct.doc.data().productPrice;
+        if (singleCartProduct.type === "added") {
+          const cartProductId = singleCartProduct.doc.data().productId;
+          const cartProductImg = singleCartProduct.doc.data().productImg;
+          const cartProductTitle = singleCartProduct.doc.data().productTitle;
+          cartTotalPrice += cartProductPrice;
+
+          cartList.innerHTML += `
+                    <li class="cartProductList mt-3" id="${singleCartProduct.doc.id}">
+                        <div class="cartProductDetailDiv">
+                            <p><i class="fa-regular fa-circle" style="color: #4B1EB1;"></i></p>
+                            <div class="cartProductImgDiv">
+                                <img src=${cartProductImg} alt="">
+                            </div>
+                            <div class="cartProductTitle">
+                                <p id="cartProductTitlePara">${cartProductTitle}</p>
+                            </div>
+                        </div>
+                        <div class="cartProductPrice">
+                            <p id="cartProductPricePara">$${cartProductPrice.toFixed(2)}</p>
+                            <p id="xMark" onclick="delCartProduct('${singleCartProduct.doc.id}')"><i class="fa-solid fa-xmark fa-lg" style="color: #f55555;"></i></p>
+                        </div>
+                    </li>
+                    `
+
+        } else if (singleCartProduct.type === "removed") {
+          let delLi = document.getElementById(singleCartProduct.doc.id)
+          if (delLi) {
+            delLi.remove()
+          }
+          cartTotalPrice -= cartProductPrice;
+        }
+        cartTotalPricePara.innerHTML = `$${cartTotalPrice.toFixed(2)}`
+      })
+    } else {
+      $('#addChartCanvas').offcanvas('hide');
+      btn.disabled = true;
+    }
+  })
+
+})

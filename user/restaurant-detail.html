@@ -33,11 +33,26 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="./index.html">Home</a>
                             </li>
+                            <!-- <div class="cartDiv">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0"> -->
+                            <li class="nav-item cartLi">
+                                <a class="nav-link" id="cartBtn">
+                                    <button id="btn" disabled data-bs-toggle="offcanvas" href="#addChartCanvas"
+                                        role="button" aria-controls="addChartCanvas">
+                                        <p id="cartNo"></p>
+                                        <i class="fa-solid fa-cart-shopping"></i>
+                                        My Cart
+                                    </button>
+                                </a>
+                            </li>
+                            <!-- </ul>
+                            </div> -->
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
                                     <button id="userBtn"><i class="fa-regular fa-user"></i></button>
                                 </a>
                             </li>
+
                         </ul>
                     </div>
                 </div>
@@ -45,7 +60,7 @@
         </nav>
         <!-- end navbar -->
         <div class="bannerHeadingDiv">
-            
+
         </div>
     </div>
     <!-- itemsDiv -->
@@ -128,6 +143,24 @@
         <div class="rightReservedDiv">
             <p><i class="fa-regular fa-copyright"></i> 2023 All Rights Reserved By <a
                     href="https://github.com/Huzaifa-Khan-Official/restaurent-website">Huzaifa Khan</a></p>
+        </div>
+    </div>
+
+
+    <!-- offCanva -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="addChartCanvas" aria-labelledby="addChartCanvasLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="addChartCanvasLabel">Your Cart</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="cartList">
+            </ul>
+            <hr>
+            <div class="cartPriceDiv">
+                <h6>Total Price</h6>
+                <p class="cartTotalPricePara"></p>
+            </div>
         </div>
     </div>
     <!-- javaScript Files -->

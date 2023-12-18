@@ -1,0 +1,401 @@
+@font-face {
+    font-family: 'Dancing Script';
+    src: url('./Dancing_Script/DancingScript-VariableFont_wght.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+}
+
+.coverDiv {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 500px;
+    color: white;
+    position: relative;
+}
+
+.coverBackgroundBlurDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2228319e;
+}
+
+/* navbar */
+.navbar {
+    padding: 20px 90px;
+}
+
+.navbar-brand {
+    font-family: 'Dancing Script', cursive;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand,
+.nav-link {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    transition: all .3s;
+}
+
+.navbar-brand {
+    text-transform: capitalize;
+    font-size: 32px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item:hover a,
+.navbar-brand:hover {
+    color: #ffbe33;
+}
+
+.nav-item.active a,
+.nav-link.active {
+    color: #ffbe33 !important;
+}
+
+.fa-cart-shopping {
+    color: white;
+}
+
+#logInBtn {
+    border: 1px solid #e69d006b;
+    padding: 10px 25px;
+    border-radius: 20px;
+    transition: all .5s;
+}
+
+#signUpBtn {
+    padding: 10px 25px;
+    border-radius: 20px;
+    transition: all .5s;
+    background-color: #e69d006b;
+}
+
+#signUpBtn a {
+    color: white;
+}
+
+#signUpBtn:hover,
+#logInBtn:hover {
+    background-color: #e69c00;
+}
+
+.cardBtnDiv {
+    margin: 35px 0;
+}
+
+#aboutDivButton {
+    border: none;
+    background-color: #e69d006b;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all .5s;
+}
+
+.nav-item button {
+    border: none;
+    background: transparent;
+}
+
+/* #userBtn {
+    border: 1px solid #e69d006b;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all .5s;
+} */
+
+
+#userBtn:hover,
+#aboutDivButton:hover {
+    background-color: #e69c00;
+}
+
+
+
+/* end navbar */
+/* bannerHeadDiv */
+.bannerHeadingDiv {
+    padding: 20px 90px;
+    position: absolute;
+    top: 40%;
+}
+
+.bannerHeadingDiv h1 {
+    font-size: 76px;
+    color: white;
+    font-family: 'Dancing Script', cursive;
+}
+
+
+
+
+.cardDiv .card {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    margin-top: 45px;
+    border-radius: 5px;
+    padding: 20px 15px;
+    background-color: #222831;
+    color: #ffffff;
+    position: relative;
+    justify-content: center;
+    transition: all .5s;
+}
+
+.addToCart {
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    padding: 5px;
+    border-radius: 50%;
+    border: 1px solid white;
+    transition: all .5s;
+}
+
+.cardDiv .card:hover {
+    transform: scale(1.05);
+}
+
+.cardDiv .card:hover .addToCart {
+    background-color: #e69c00;
+    border: 1px solid #e69c00;
+}
+
+.row {
+    justify-content: space-around;
+}
+
+.cardContentDiv div {
+    margin: 10px 0;
+}
+
+.cardImgDiv {
+    width: 200px;
+    height: 200px;
+}
+
+.cardImgDiv img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid #ffbe33;
+}
+
+.itemTypeDiv h6 {
+    margin: 0;
+}
+
+.itemTypeDiv {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    background-color: #e69d006b;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: all .5s;
+    display: flex;
+    gap: 10px;
+}
+
+.itemTypeDiv p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.itemTypeDiv p i {
+    font-size: 10px !important;
+    color: white;
+}
+
+.itemTypeDiv:hover {
+    background-color: #e69c00;
+}
+
+.itemsDiv {
+    padding: 0 30px;
+    padding-bottom: 30px;
+}
+
+.cardNameDiv h5 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+    margin: 0;
+}
+
+.itemPriceDivOutput {
+    display: flex;
+    gap: 10px;
+}
+
+.itemPriceDivOutput s {
+    opacity: 0.7;
+}
+
+
+/* aboutDiv */
+.aboutDiv {
+    background-color: #14171c;
+    color: white;
+    margin-top: 25px;
+}
+
+.aboutDiv .row {
+    padding: 20px 40px;
+}
+
+.aboutDivImg {
+    display: flex;
+    justify-content: center;
+}
+
+.aboutDivImg img {
+    width: 30vw;
+}
+
+.aboutDivContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutDivCol2 {
+    display: flex;
+    align-items: center;
+}
+
+.aboutDivHeading h2 {
+    font-size: 46px;
+    font-family: 'Dancing Script', cursive;
+
+}
+
+/* footer */
+.footerDiv {
+    border-top: .5px solid white;
+    background-color: #14171c;
+    padding: 60px 20px;
+    color: white;
+    padding-bottom: 10px;
+}
+
+.footerListDiv {
+    padding-top: 20px;
+}
+
+.footerListDiv .row .column {
+    text-align: center;
+}
+
+
+.footerListHeadDiv h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 34px;
+}
+
+#iconsPara {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+#iconsPara p {
+    border-radius: 50%;
+    padding: 8px;
+    background-color: white;
+    color: black;
+    transition: all .3s;
+}
+
+#iconsPara p i {
+    font-size: 20px;
+}
+
+#iconsPara p:hover,
+.rightReservedDiv a:hover {
+    color: #ffbe33;
+}
+
+.rightReservedDiv {
+    margin-top: 20px;
+}
+
+.rightReservedDiv p {
+    text-align: center;
+}
+
+.rightReservedDiv a {
+    color: white;
+    text-decoration: underline;
+    transition: all .3s;
+}
+
+@media (max-width: 549px) {
+    .nav-List {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 15px;
+    }
+
+    .navbar {
+        display: block;
+    }
+}
+
+@media (max-width: 640px) {
+    .itemsDiv {
+        padding: 0 20px;
+    }
+}
+
+
+
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav {
+        flex-direction: row;
+        gap: 30px;
+    }
+
+}
+
+@media (max-width: 992px) {
+    .navbarListDiv {
+        width: 100%;
+    }
+
+    .cardDiv .card {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 330px) {
+    .carousel-indicators {
+        bottom: -30px;
+        left: 20px;
+    }
+}

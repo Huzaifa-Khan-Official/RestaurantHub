@@ -12,6 +12,7 @@ import {
   getFirestore,
   doc,
   setDoc,
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const db = getFirestore(app);
@@ -79,6 +80,25 @@ googleSignInBtn.addEventListener("click", () => {
 
       const user = result.user;
 
+      const userUid = user.uid;
+
+      const userRef = doc(db, "users", userUid);
+
+      const docSnap = await getDoc(userRef);
+
+      if (docSnap.exists()) {
+        localStorage.setItem("userUid", userUid);
+        location.href = "../user/index.html";
+      } else {
+        const adminRef = doc(db, "restaurants", userUid);
+        const adminDocSnap = await getDoc(adminRef);
+
+        if (adminDocSnap.exists()) {
+          localStorage.setItem("adminUid", userUid);
+          location.href = "../register/admin/admin.html";
+        }
+      }
+
       let userData = {
         sname: user.displayName,
         semail: user.email,
@@ -92,7 +112,7 @@ googleSignInBtn.addEventListener("click", () => {
 
       localStorage.setItem("userUid", user.uid);
 
-      location.href = "../index.html";
+      location.href = "../user/index.html";
     })
     .catch((error) => {
       // Handle Errors here.
@@ -112,14 +132,25 @@ googleSignInBtn.addEventListener("click", () => {
     });
 });
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
     const userUid = user.uid;
-  } else {
-    localStorage.removeItem("userUid");
+
+    const userRef = doc(db, "users", userUid);
+
+    const docSnap = await getDoc(userRef);
+
+    if (docSnap.exists()) {
+      localStorage.setItem("userUid", userUid);
+      location.href = "../user/index.html";
+    } else {
+      const adminRef = doc(db, "restaurants", userUid);
+      const adminDocSnap = await getDoc(adminRef);
+
+      if (adminDocSnap.exists()) {
+        localStorage.setItem("adminUid", userUid);
+        location.href = "../register/admin/admin.html";
+      }
+    }
   }
 });
-
-if (localStorage.getItem("userUid")) {
-  location.href = "../user/index.html";
-}

@@ -12,13 +12,36 @@ import {
   getFirestore,
   doc,
   setDoc,
-  getDoc
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
 const auth = getAuth();
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const adminUid = user.uid;
+
+    const adminRef = doc(db, "restaurants", adminUid);
+
+    const adminSnap = await getDoc(adminRef);
+
+    if (adminSnap.exists()) {
+      localStorage.setItem("adminUid", adminUid);
+      location.href = "./admin/admin.html";
+    } else {
+      const userRef = doc(db, "users", adminUid);
+      const userDocSnap = await getDoc(userRef);
+
+      if (userDocSnap.exists()) {
+        localStorage.setItem("userUid", adminUid);
+        location.href = "../user/index.html";
+      }
+    }
+  }
+});
 
 let sbtn = document.querySelector("#sbtn"); // get signin btn
 let errorPara = document.querySelector("#errorPara"); // get error paragraph
@@ -39,7 +62,7 @@ sbtn.addEventListener("click", () => {
       sname: sname.value,
       semail: semail.value,
       spassword: spassword.value,
-      status: false
+      status: false,
     };
     // creating user with eamil and password
     createUserWithEmailAndPassword(auth, adminData.semail, adminData.spassword)
@@ -50,7 +73,7 @@ sbtn.addEventListener("click", () => {
         await setDoc(doc(db, "restaurants", user.uid), {
           // collection name,   unique id of user
           ...adminData, // setting array in a database
-          adminUid // also admin id in the database
+          adminUid, // also admin id in the database
         });
 
         location.href = "./login-restaurant.html";
@@ -84,16 +107,33 @@ googleSignInBtn.addEventListener("click", () => {
       const user = result.user;
       const adminUid = user.uid;
 
+      const adminRef = doc(db, "restaurants", adminUid);
+
+      const adminSnap = await getDoc(adminRef);
+
+      if (adminSnap.exists()) {
+        localStorage.setItem("adminUid", adminUid);
+        location.href = "./admin/admin.html";
+      } else {
+        const userRef = doc(db, "users", adminUid);
+        const userDocSnap = await getDoc(userRef);
+
+        if (userDocSnap.exists()) {
+          localStorage.setItem("userUid", adminUid);
+          location.href = "../user/index.html";
+        }
+      }
+
       let adminData = {
         sname: user.displayName,
         semail: user.email,
-        status: false
+        status: false,
       };
 
-      await setDoc(doc(db, "restaurants", user.uid), {
+      await setDoc(doc(db, "restaurants", adminUid), {
         // collection name,   unique id of user
         ...adminData, // setting array in a database
-        adminUid // also admin id in the database
+        adminUid, // also admin id in the database
       });
 
       localStorage.setItem("adminUid", adminUid);
@@ -103,12 +143,12 @@ googleSignInBtn.addEventListener("click", () => {
 
       if (docSnap.exists()) {
         if (docSnap.data().status == false) {
-          location.href = "./admin/restaurant-details.html"
+          location.href = "./admin/restaurant-details.html";
         } else {
-          location.href = "./admin/admin.html"
+          location.href = "./admin/admin.html";
         }
       } else {
-        location.href = "./admin/restaurant-details.html"
+        location.href = "./admin/restaurant-details.html";
       }
     })
     .catch((error) => {

@@ -8,7 +8,8 @@ import {
   doc,
   query,
   deleteDoc,
-  updateDoc
+  updateDoc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 import {
@@ -19,7 +20,8 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
 import {
-  getAuth
+  onAuthStateChanged,
+  getAuth,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const db = getFirestore(app);
@@ -27,6 +29,28 @@ const db = getFirestore(app);
 const storage = getStorage();
 const auth = getAuth();
 
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const adminUid = user.uid;
+
+    const adminRef = doc(db, "restaurants", adminUid);
+    const docSnap = await getDoc(adminRef);
+
+    if (docSnap.exists()) {
+      localStorage.setItem("adminUid", adminUid);
+    } else {
+      // If user is not in "users" collection, check if they are in "restaurants" collection
+      const userRef = doc(db, "users", adminUid);
+      const userDocSnap = await getDoc(userRef);
+
+      if (userDocSnap.exists()) {
+        // User is an admin, redirect to admin dashboard
+        localStorage.setItem("userUid", adminUid);
+        location.href = "../../user/index.html";
+      }
+    }
+  }
+});
 
 const adminUid = localStorage.getItem("adminUid");
 
@@ -213,7 +237,7 @@ const getItems = () => {
                 </div>
                 `;
       } else if (singleItem.type === "modified") {
-        $('#editItemModal').modal('hide');
+        $("#editItemModal").modal("hide");
         let uItem = document.getElementById(singleItem.doc.id);
         const itemId = singleItem.doc.id;
         const itemImg = singleItem.doc.data().itemImg;
@@ -271,14 +295,12 @@ async function delBtnFunction(id) {
   await deleteDoc(doc(db, `restaurants/${adminUid}/menue`, id));
 }
 
-
 const EditimgOutput = document.querySelector("#EditimgOutput");
 const EditItemName = document.querySelector("#EditItemName");
 const EdititemDesc = document.querySelector("#EdititemDesc");
 const EditItemType = document.querySelector("#EditItemType");
 const editItemPrice = document.querySelector("#editItemPrice");
 const editPrevItemPrice = document.querySelector("#editPrevItemPrice");
-
 
 let updateItemId;
 async function editItem(e, id) {
@@ -329,19 +351,18 @@ editItemFunction.addEventListener("click", async () => {
     prevPrice,
   };
   await updateDoc(itemRef, {
-    ...itemDetail
+    ...itemDetail,
   });
-})
-
+});
 
 const LogOutBtn = document.querySelector("#LogOutBtn");
 
 LogOutBtn.addEventListener("click", () => {
   auth.signOut().then(() => {
-    localStorage.removeItem("userUid");
+    localStorage.removeItem("adminUid");
     location.href = "../../index.html";
-  })
-})
+  });
+});
 
 window.delBtnFunction = delBtnFunction;
 window.editItem = editItem;

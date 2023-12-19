@@ -1,4 +1,5 @@
 import { app } from "../config.js";
+
 import {
   getAuth,
   onAuthStateChanged,
@@ -9,6 +10,7 @@ import {
   collection,
   addDoc,
   onSnapshot,
+  getDoc,
   doc,
   query,
   deleteDoc,
@@ -17,11 +19,25 @@ import {
 const auth = getAuth();
 const db = getFirestore(app);
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (user) {
     const userUid = user.uid;
-    localStorage.setItem("userUid", userUid);
-    location.href = "./user/index.html";
+
+    const userRef = doc(db, "users", userUid);
+    const docSnap = await getDoc(userRef);
+
+    if (docSnap.exists()) {
+      localStorage.setItem("userUid", userUid);
+      location.href = "./user/index.html";
+    } else {
+      const adminRef = doc(db, "restaurants", userUid);
+      const adminDocSnap = await getDoc(adminRef);
+
+      if (adminDocSnap.exists()) {
+        localStorage.setItem("adminUid", userUid);
+        location.href = "./register/admin/admin.html";
+      }
+    }
   }
 });
 
@@ -37,29 +53,29 @@ const getItems = () => {
   const q = query(collection(db, `restaurants/`));
   onSnapshot(q, (querySnapshot) => {
     querySnapshot.docChanges().forEach((singleBusiness) => {
-        
       if (singleBusiness.type === "removed") {
         let dItem = document.getElementById(singleBusiness.doc.id);
         if (dItem) {
-            dItem.remove();
+          dItem.remove();
         }
-    } else {
-      const businessType = singleBusiness.doc.data().BusinessType;
-      const businessName = singleBusiness.doc.data().businessName;
-      const businessImg = singleBusiness.doc.data().businessImg;
-      const businessId = singleBusiness.doc.id;
+      } else {
+        const businessType = singleBusiness.doc.data().BusinessType;
+        const businessName = singleBusiness.doc.data().businessName;
+        const businessImg = singleBusiness.doc.data().businessImg;
+        const businessId = singleBusiness.doc.id;
 
-      ourRestCards.innerHTML += `
+        ourRestCards.innerHTML += `
         <div class="card col-lg-3 col-md-6 col-12" style="width: 18rem;" id="${businessId}" onclick="selectRestaurant('${businessId}')">
-            <img src="${businessImg}" class="card-img-top" alt="...">
+            <div class="cardImgDiv">
+              <img src="${businessImg}" class="card-img-top" alt="...">
+            </div>
             <div class="card-body">
                 <h5 class="card-title" id="restName">${businessName}</h5>
                 <p class="card-text" id="restCateg">${businessType}</p>
             </div>
         </div>
-      `
-    }
-
+      `;
+      }
     });
   });
 };
@@ -67,9 +83,9 @@ const getItems = () => {
 getItems();
 
 function selectRestaurant(restaurantId) {
-    localStorage.setItem("selectedRestaurantId", restaurantId)
-    console.log(restaurantId);
-    location.href = "./restaurant-detail.html";
+  localStorage.setItem("selectedRestaurantId", restaurantId);
+  console.log(restaurantId);
+  location.href = "./restaurant-detail.html";
 }
 
 window.selectRestaurant = selectRestaurant;

@@ -1,16 +1,47 @@
 import { app } from "../../config.js";
 
 import {
+  getAuth,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+import {
   getFirestore,
   collection,
   onSnapshot,
   query,
   where,
   doc,
+  getDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+
+const auth = getAuth();
 const db = getFirestore(app);
 
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    const userUid = user.uid;
+
+    const userRef = doc(db, "users", userUid);
+    const docSnap = await getDoc(userRef);
+
+    if (docSnap.exists()) {
+      localStorage.setItem("userUid", userUid);
+      location.href = "./user/index.html";
+    } else {
+      // If user is not in "users" collection, check if they are in "restaurants" collection
+      const adminRef = doc(db, "restaurants", userUid);
+      const adminDocSnap = await getDoc(adminRef);
+
+      if (adminDocSnap.exists()) {
+        // User is an admin, redirect to admin dashboard
+        localStorage.setItem("adminUid", userUid);
+        location.href = "./register/admin/admin.html";
+      }
+    }
+  }
+});
 const restaurantId = localStorage.getItem("selectedRestaurantId");
 if (!restaurantId) {
   location.href = "./index.html";
@@ -24,7 +55,7 @@ const getRestaurantDetails = async (restaurantId) => {
   const restRef = doc(db, "restaurants", restaurantId);
 
   onSnapshot(restRef, (docSnapshot) => {
-    if ((docSnapshot.exists()) && (docSnapshot.data().status)) {
+    if (docSnapshot.exists() && docSnapshot.data().status) {
       const businessimg = docSnapshot.data().businessImg;
       const businessName = docSnapshot.data().businessName;
       const businesstype = docSnapshot.data().BusinessType;

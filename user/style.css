@@ -162,15 +162,12 @@ body {
 }
 
 .cardImgDiv {
-    width: 200px;
     height: 200px;
 }
 
 .cardImgDiv img {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 6px solid #ffbe33;
+    height: 100%;
+    border-radius: 15px;
 }
 
 .salesDiv {
@@ -223,16 +220,12 @@ body {
     transition: all .3s;
 }
 
-.ourRestCards .card img {
-    border-radius: 15px;
-}
-
 .ourRestCards .card:hover {
     background-color: #bdbdbd4a;
 }
 
-.ourRestCards .card:hover img {
-    transform: scale(1.01);
+.ourRestCards .card:hover {
+    transform: scale(1.04);
     transition: transform 0.3s ease-in-out;
 }
 
@@ -338,23 +331,25 @@ body {
         height: 900px;
     }
 }
+
 @media (max-width: 210px) {
     .stickyTopDiv {
         padding: 20px;
     }
 }
+
 @media (max-width: 240px) {
     .headingDiv h1 {
         font-size: 30px !important;
     }
 }
 
-@media (max-width: 260px) {
+/* @media (max-width: 260px) {
     .cardImgDiv {
         width: 100px;
         height: 100px;
     }
-}
+} */
 
 @media (max-width: 370px) {
     .headingDiv h1 {
@@ -377,10 +372,7 @@ body {
         padding-left: 15px;
     }
 
-    .navbar {
-        display: block;
-        padding: 0 20px;
-    }
+
 
     .crossIconDiv {
         position: initial;
@@ -400,6 +392,11 @@ body {
 
 @media (max-width: 650px) {
     .bannerContentDiv {
+        padding: 0 20px;
+    }
+
+    .navbar {
+        display: block;
         padding: 0 20px;
     }
 }

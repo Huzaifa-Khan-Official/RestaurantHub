@@ -156,7 +156,8 @@ body {
 /* inputDiv */
 
 /* itemImgDiv */
-.imgInputDiv {
+.imgInputDiv,
+.editImgInputDiv {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -175,15 +176,22 @@ body {
     display: block;
 }
 
-#imgInput {
+.editImgInputDiv:hover .fa-camera {
+    display: block;
+    z-index: 1;
+}
+
+#imgInput,
+#editImgInput {
     display: none;
 }
 
-#imgOutput, #EditimgOutput {
+#imgOutput,
+#EditimgOutput {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    z-index: -100;
+    z-index: 0;
     position: relative;
 }
 
@@ -194,17 +202,31 @@ body {
     transform: translate(-50%, -50%);
     display: none;
     font-size: larger;
-    transition: all .3s;
+    transition: all .5s;
 }
 
-.imgInputDiv .spinner-border {
+.imgInputDiv .spinner-border,
+.editImgInputDiv .updImgSpinner {
     position: absolute;
     display: none;
     color: black;
 }
 
-#EditimgOutput {
+.imgBlurDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.339);
+    border-radius: 50%;
     z-index: 1;
+    display: none;
+    transition: all .5s;
+}
+
+.editImgInputDiv:hover .imgBlurDiv {
+    display: block;
 }
 
 /* itemImgDiv */
@@ -443,13 +465,17 @@ body {
 }
 
 @media (max-width: 220px) {
-    .itemPriceDiv .form-control, .previousPriceDiv .form-control {
+
+    .itemPriceDiv .form-control,
+    .previousPriceDiv .form-control {
         width: 100px;
         display: block;
         margin: 10px 0;
     }
 
-    .imgInputDiv, .cardImgDiv {
+    .imgInputDiv,
+    .cardImgDiv,
+    .editImgInputDiv {
         width: 100px !important;
         height: 100px !important;
     }

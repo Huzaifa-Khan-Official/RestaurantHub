@@ -9,7 +9,7 @@ import {
   query,
   deleteDoc,
   updateDoc,
-  getDoc
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 import {
@@ -114,7 +114,6 @@ imgInputDiv.addEventListener("click", () => {
 imgInput.addEventListener("change", async () => {
   if (imgInput.files.length > 0) {
     const file = imgInput.files[0];
-    // imgOutput.src = "";
     imgUrl = await downloadImageUrl(file);
     spinnerBorder.style.display = "none";
     if (imgUrl) {
@@ -227,7 +226,7 @@ const getItems = () => {
                         </div>
 
                         <div class="cardBtnDiv">
-                            <button id="editItemBtn" data-bs-toggle="modal" data-bs-target="#editItemModal" onclick="editItem(this, '${itemId}')">Edit Item <i class="fa-solid fa-pen-to-square"></i></button>
+                            <button id="editItemBtn" data-bs-toggle="modal" data-bs-target="#editItemModal" onclick="editItem('${itemId}')">Edit Item <i class="fa-solid fa-pen-to-square"></i></button>
                         </div>
 
                         <div class="cardBtnDiv">
@@ -276,7 +275,7 @@ const getItems = () => {
                         </div>
 
                         <div class="cardBtnDiv">
-                            <button id="editItemBtn" data-bs-toggle="modal" data-bs-target="#editItemModal" onclick="editItem(this, '${itemId}')">Edit Item <i class="fa-solid fa-pen-to-square"></i></button>
+                            <button id="editItemBtn" data-bs-toggle="modal" data-bs-target="#editItemModal" onclick="editItem('${itemId}')">Edit Item <i class="fa-solid fa-pen-to-square"></i></button>
                         </div>
 
                         <div class="cardBtnDiv">
@@ -303,7 +302,7 @@ const editItemPrice = document.querySelector("#editItemPrice");
 const editPrevItemPrice = document.querySelector("#editPrevItemPrice");
 
 let updateItemId;
-async function editItem(e, id) {
+async function editItem(id) {
   const restRef = doc(db, `restaurants/${adminUid}/menue`, id);
   updateItemId = id;
   onSnapshot(restRef, (selectItem) => {
@@ -325,34 +324,119 @@ async function editItem(e, id) {
   });
 }
 
+const editImgInputDiv = document.querySelector(".editImgInputDiv");
+const editImgInput = document.querySelector("#editImgInput");
+const updImgSpinner = document.querySelector(".updImgSpinner");
+
+editImgInputDiv.addEventListener("click", () => {
+  editImgInput.click();
+});
+
+let updateImgUrl;
+
+const updateImgaeUrlLink = (file) => {
+  return new Promise((resolve, reject) => {
+    const restaurantImageRef = ref(
+      storage,
+      `restaurantImages/${localStorage.getItem("adminUid")}/${file.name}`
+    );
+    const uploadTask = uploadBytesResumable(restaurantImageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        switch (snapshot.state) {
+          case "paused":
+            break;
+          case "running":
+            updImgSpinner.style.display = "block";
+            break;
+        }
+      },
+      (error) => {
+        reject(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref)
+          .then((downloadURL) => {
+            resolve(downloadURL);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }
+    );
+  });
+};
+
+editImgInput.addEventListener("change", async () => {
+  if (editImgInput.files.length > 0) {
+
+    const file = editImgInput.files[0];
+    updateImgUrl = await updateImgaeUrlLink(file);
+    updImgSpinner.style.display = "none";
+    if (updateImgUrl) {
+      EditimgOutput.src = updateImgUrl;
+    }
+  }
+});
+
 const editItemFunction = document.querySelector("#editItemfunction");
 editItemFunction.addEventListener("click", async () => {
-  // console.log(updateItemId);
-  const updatedImg = EditimgOutput.value;
+  const previousItemImgUrl = EditimgOutput.src;
   const updatedItemName = EditItemName.value;
   const updatedItemDesc = EdititemDesc.value;
   const updatedItemType = EditItemType.value;
   const updatedItemPrice = editItemPrice.value;
   const updatedItemPrevPrice = editPrevItemPrice.value;
 
-  const itemRef = doc(db, `restaurants/${adminUid}/menue`, updateItemId);
-  let prevPrice;
-  if (updatedItemPrevPrice) {
-    prevPrice = updatedItemPrevPrice;
+  if (updatedItemName == "") {
+    location.href = "#EditItemName";
+  } else if (updatedItemDesc == "") {
+    location.href = "#EdititemDesc";
+  } else if (updatedItemType == "") {
+    location.href = "#EditItemType";
+  } else if (updatedItemPrice == "") {
+    location.href = "#editItemPrice";
   } else {
-    prevPrice = "";
-  }
 
-  const itemDetail = {
-    itemName: updatedItemName,
-    itemDesc: updatedItemDesc,
-    itemType: updatedItemType,
-    itemPrice: updatedItemPrice,
-    prevPrice,
-  };
-  await updateDoc(itemRef, {
-    ...itemDetail,
+    const itemRef = doc(db, `restaurants/${adminUid}/menue`, updateItemId);
+
+    let prevPrice;
+    let updateImageUrl;
+
+    if (updateImgUrl) {
+      updateImageUrl = updateImgUrl
+    } else {
+      updateImageUrl = previousItemImgUrl
+    }
+
+    if (updatedItemPrevPrice) {
+      prevPrice = updatedItemPrevPrice;
+    } else {
+      prevPrice = "";
+    }
+
+    const itemDetail = {
+      itemName: updatedItemName,
+      itemDesc: updatedItemDesc,
+      itemType: updatedItemType,
+      itemPrice: updatedItemPrice,
+      itemImg: updateImageUrl,
+      prevPrice,
+    };
+    await updateDoc(itemRef, {
+      ...itemDetail,
+    });
+
+    Swal.fire({
+      title: "Congratulations!",
+      text: "Item Updated Successfully!",
+      icon: "success"
   });
+  }
 });
 
 const LogOutBtn = document.querySelector("#LogOutBtn");

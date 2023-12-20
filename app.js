@@ -14,6 +14,7 @@ import {
   doc,
   query,
   deleteDoc,
+  where
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const auth = getAuth();
@@ -50,7 +51,8 @@ crossIconDiv.addEventListener("click", () => {
 });
 
 const getItems = () => {
-  const q = query(collection(db, `restaurants/`));
+  const restaurantsRef = collection(db, `restaurants/`);
+  const q = query(restaurantsRef, where("status", "==", true));
   onSnapshot(q, (querySnapshot) => {
     querySnapshot.docChanges().forEach((singleBusiness) => {
       if (singleBusiness.type === "removed") {
@@ -66,7 +68,7 @@ const getItems = () => {
 
         ourRestCards.innerHTML += `
         <div class="card col-lg-3 col-md-6 col-12" style="width: 18rem;" id="${businessId}" onclick="selectRestaurant('${businessId}')">
-            <div class="cardImgDiv">
+            <div class="restCardImgDiv">
               <img src="${businessImg}" class="card-img-top" alt="...">
             </div>
             <div class="card-body">

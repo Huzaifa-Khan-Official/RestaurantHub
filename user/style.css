@@ -162,10 +162,22 @@ body {
 }
 
 .cardImgDiv {
+    width: 200px;
     height: 200px;
 }
 
 .cardImgDiv img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid #ffbe33;
+}
+
+.restCardImgDiv {
+    height: 200px;
+}
+
+.restCardImgDiv img {
     height: 100%;
     border-radius: 15px;
 }
@@ -332,7 +344,17 @@ body {
     }
 }
 
-@media (max-width: 210px) {
+@media (max-width: 200px) {
+    .bannerContentDiv {
+        word-break: break-all;
+    }
+}
+
+@media (max-width: 220px) {
+    .navbar>.container-fluid {
+        justify-content: center;
+    }
+
     .stickyTopDiv {
         padding: 20px;
     }
@@ -344,12 +366,30 @@ body {
     }
 }
 
-/* @media (max-width: 260px) {
+@media (max-width: 260px) {
     .cardImgDiv {
         width: 100px;
         height: 100px;
     }
-} */
+
+    .restCardImgDiv {
+        height: 100px;
+    }
+
+    .ourRestHeadDiv h2, .aboutDivHeading h2 {
+        font-size: 26px;
+        padding: 0 20px;
+        word-break: break-word;
+    }
+
+    .aboutDivHeading h2 {
+        padding: 0;
+    }
+
+    .cardOFFDiv h6 span {
+        font-size: 24px;
+    }
+}
 
 @media (max-width: 370px) {
     .headingDiv h1 {

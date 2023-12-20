@@ -10,6 +10,7 @@ import {
   deleteDoc,
   updateDoc,
   getDoc,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 import {
@@ -159,6 +160,7 @@ addItemBtn.addEventListener("click", async () => {
       itemPrice: itemPriceValue,
       itemImg: imgUrl,
       prevPrice,
+      time: new Date().toLocaleString()
     };
     await addDoc(collection(db, `restaurants/${adminUid}/menue`), {
       ...itemDetail,
@@ -175,7 +177,7 @@ addItemBtn.addEventListener("click", async () => {
 });
 
 const getItems = () => {
-  const q = query(collection(db, `restaurants/${adminUid}/menue`));
+  const q = query(collection(db, `restaurants/${adminUid}/menue`), orderBy("time"));
   onSnapshot(q, (querySnapshot) => {
     querySnapshot.docChanges().forEach((singleItem) => {
       if (querySnapshot.size) {
@@ -418,7 +420,6 @@ editItemFunction.addEventListener("click", async () => {
     } else {
       prevPrice = "";
     }
-
     const itemDetail = {
       itemName: updatedItemName,
       itemDesc: updatedItemDesc,
@@ -427,6 +428,7 @@ editItemFunction.addEventListener("click", async () => {
       itemImg: updateImageUrl,
       prevPrice,
     };
+    
     await updateDoc(itemRef, {
       ...itemDetail,
     });

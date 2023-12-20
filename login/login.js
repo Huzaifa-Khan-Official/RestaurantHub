@@ -116,25 +116,25 @@ googleSignInBtn.addEventListener("click", () => {
     });
 });
 
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    const userUid = user.uid;
+// onAuthStateChanged(auth, async (user) => {
+//   if (user) {
+//     const userUid = user.uid;
 
-    const userRef = doc(db, "users", userUid);
+//     const userRef = doc(db, "users", userUid);
 
-    const docSnap = await getDoc(userRef);
+//     const docSnap = await getDoc(userRef);
 
-    if (docSnap.exists()) {
-      localStorage.setItem("userUid", userUid);
-      location.href = "../user/index.html";
-    } else {
-      const adminRef = doc(db, "restaurants", userUid);
-      const adminDocSnap = await getDoc(adminRef);
+//     if (docSnap.exists()) {
+//       localStorage.setItem("userUid", userUid);
+//       location.href = "../user/index.html";
+//     } else {
+//       const adminRef = doc(db, "restaurants", userUid);
+//       const adminDocSnap = await getDoc(adminRef);
 
-      if (adminDocSnap.exists()) {
-        localStorage.setItem("adminUid", userUid);
-        location.href = "../register/admin/admin.html";
-      }
-    }
-  }
-});
+//       if (adminDocSnap.exists()) {
+//         localStorage.setItem("adminUid", userUid);
+//         location.href = "../register/admin/admin.html";
+//       }
+//     }
+//   }
+// });

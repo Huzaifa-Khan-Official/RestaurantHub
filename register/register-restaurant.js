@@ -20,28 +20,28 @@ const provider = new GoogleAuthProvider();
 
 const auth = getAuth();
 
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    const adminUid = user.uid;
+// onAuthStateChanged(auth, async (user) => {
+//   if (user) {
+//     const adminUid = user.uid;
 
-    const adminRef = doc(db, "restaurants", adminUid);
+//     const adminRef = doc(db, "restaurants", adminUid);
 
-    const adminSnap = await getDoc(adminRef);
+//     const adminSnap = await getDoc(adminRef);
 
-    if (adminSnap.exists()) {
-      localStorage.setItem("adminUid", adminUid);
-      location.href = "./admin/admin.html";
-    } else {
-      const userRef = doc(db, "users", adminUid);
-      const userDocSnap = await getDoc(userRef);
+//     if (adminSnap.exists()) {
+//       localStorage.setItem("adminUid", adminUid);
+//       location.href = "./admin/admin.html";
+//     } else {
+//       const userRef = doc(db, "users", adminUid);
+//       const userDocSnap = await getDoc(userRef);
 
-      if (userDocSnap.exists()) {
-        localStorage.setItem("userUid", adminUid);
-        location.href = "../user/index.html";
-      }
-    }
-  }
-});
+//       if (userDocSnap.exists()) {
+//         localStorage.setItem("userUid", adminUid);
+//         location.href = "../user/index.html";
+//       }
+//     }
+//   }
+// });
 
 let sbtn = document.querySelector("#sbtn"); // get signin btn
 let errorPara = document.querySelector("#errorPara"); // get error paragraph
@@ -70,6 +70,7 @@ sbtn.addEventListener("click", () => {
       .then(async (userCredential) => {
         const user = userCredential.user; // getting user from firebase
         const adminUid = user.uid;
+
         await setDoc(doc(db, "restaurants", user.uid), {
           // collection name,   unique id of user
           ...adminData, // setting array in a database
@@ -177,6 +178,6 @@ googleSignInBtn.addEventListener("click", () => {
 //   }
 // });
 
-if (localStorage.getItem("adminUid")) {
-  location.href = "./admin/admin.html";
-}
+// if (localStorage.getItem("adminUid")) {
+//   location.href = "./admin/admin.html";
+// }

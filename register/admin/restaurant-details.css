@@ -173,6 +173,7 @@ body {
 .spinner-border {
     position: absolute;
     display: none;
+    color: black;
 }
 
 #saveBtn .spinner-border {

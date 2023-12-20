@@ -9,7 +9,8 @@ import {
   doc,
   setDoc,
   deleteDoc,
-  addDoc
+  addDoc,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -80,7 +81,7 @@ const getRestaurantDetails = async (restaurantId) => {
 getRestaurantDetails(restaurantId);
 
 const getItems = async () => {
-  const q = query(collection(db, `restaurants/${restaurantId}/menue`));
+  const q = query(collection(db, `restaurants/${restaurantId}/menue`), orderBy("time"));
   onSnapshot(q, (querySnapshot) => {
     querySnapshot.docChanges().forEach((singleItem) => {
       if (singleItem.type === "removed") {

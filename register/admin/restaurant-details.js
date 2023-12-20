@@ -123,7 +123,6 @@ uploadBtnDiv.addEventListener("click", () => {
 picInput.addEventListener("change", async () => {
   if (picInput.files.length > 0) {
     const file = picInput.files[0];
-    picOutput.src = "";
     imgUrl = await downloadImageUrl(file);
     spinnerBorder.style.display = "none";
     if (imgUrl) {
@@ -149,6 +148,8 @@ saveBtn.addEventListener("click", async () => {
   } else if (!imgUrl) {
     location.href = "#picInput";
   } else {
+
+    const adminUid = localStorage.getItem("adminUid");
     const restaurantRef = doc(db, "restaurants", adminUid);
     saveBtn.innerHTML = `
                     <div class="spinner-border saveBtnSpinner" role="status">

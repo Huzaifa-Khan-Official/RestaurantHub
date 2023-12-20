@@ -98,7 +98,7 @@ googleSignInBtn.addEventListener("click", () => {
 
       if (docSnap.exists()) {
         localStorage.setItem("adminUid", adminUid);
-        if (docSnap.data().status == false) {
+        if (docSnap.data().status === false) {
           location.href = "./admin/restaurant-details.html";
         } else {
           location.href = "./admin/admin.html";
@@ -123,9 +123,9 @@ googleSignInBtn.addEventListener("click", () => {
     });
 });
 
-if (localStorage.getItem("adminUid")) {
-  location.href = "./admin/admin.html";
-}
+// if (localStorage.getItem("adminUid")) {
+//   location.href = "./admin/admin.html";
+// }
 
 // onAuthStateChanged(auth, (user) => {
 //     if (user) {

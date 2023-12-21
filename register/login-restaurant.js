@@ -25,6 +25,11 @@ let lbtn = document.querySelector("#lbtn"); // get login btn
 let errorPara = document.querySelector("#errorPara"); // get error paragraph
 
 lbtn.addEventListener("click", () => {
+  lbtn.innerHTML = `
+          <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+          </div>
+  `;
   signInWithEmailAndPassword(auth, lemail.value, lpassword.value)
     .then(async (userCredential) => {
       const user = userCredential.user;
@@ -34,6 +39,8 @@ lbtn.addEventListener("click", () => {
       const docRef = doc(db, "restaurants", adminUid);
       const docSnap = await getDoc(docRef);
 
+      lbtn.innerHTML = "Login";
+    
       if (docSnap.exists()) {
         localStorage.setItem("adminUid", adminUid);
         if (docSnap.data().status == false) {

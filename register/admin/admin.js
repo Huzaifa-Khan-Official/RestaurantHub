@@ -166,7 +166,7 @@ addItemBtn.addEventListener("click", async () => {
       ...itemDetail,
     });
 
-    addItemBtn.innerHTML = "Save & Continue";
+    addItemBtn.innerHTML = "Add Item";
     imgOutput.src = "../../assets/imgGoesHere.png";
     itemName.value = "";
     itemDesc.value = "";

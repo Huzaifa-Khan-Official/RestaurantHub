@@ -47,6 +47,11 @@ body {
     transition: all .5s;
 }
 
+#sbtn .spinner-border {
+    width: 20px;
+    height: 20px;
+}
+
 #sbtn:hover,
 #googleSignInBtn:hover {
     background-color: #e69c00;

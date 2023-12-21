@@ -55,6 +55,7 @@ const getItems = () => {
   const q = query(restaurantsRef, where("status", "==", true));
   onSnapshot(q, (querySnapshot) => {
     querySnapshot.docChanges().forEach((singleBusiness) => {
+      console.log(singleBusiness.doc.data());
       if (singleBusiness.type === "removed") {
         let dItem = document.getElementById(singleBusiness.doc.id);
         if (dItem) {

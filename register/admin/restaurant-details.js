@@ -83,7 +83,7 @@ const downloadImageUrl = (file) => {
   return new Promise((resolve, reject) => {
     const restaurantImageRef = ref(
       storage,
-      `restaurantImages/${adminUid}/${adminUid}.jpg`
+      `restaurantImages/${adminUid}/${file.name}`
     );
     const uploadTask = uploadBytesResumable(restaurantImageRef, file);
 

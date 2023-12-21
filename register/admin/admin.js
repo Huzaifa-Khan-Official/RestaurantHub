@@ -166,6 +166,12 @@ addItemBtn.addEventListener("click", async () => {
       ...itemDetail,
     });
 
+    Swal.fire({
+      title: "Congratulations!",
+      text: "Item Added Successfully!",
+      icon: "success"
+  });
+
     addItemBtn.innerHTML = "Add Item";
     imgOutput.src = "../../assets/imgGoesHere.png";
     itemName.value = "";

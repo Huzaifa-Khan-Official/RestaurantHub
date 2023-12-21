@@ -12,9 +12,8 @@ import {
   query,
   where,
   doc,
-  getDoc
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
 
 const auth = getAuth();
 const db = getFirestore(app);
@@ -81,10 +80,17 @@ const getRestaurantDetails = async (restaurantId) => {
 };
 
 getRestaurantDetails(restaurantId);
-
 const getItems = async () => {
   const q = query(collection(db, `restaurants/${restaurantId}/menue`));
   onSnapshot(q, (querySnapshot) => {
+
+    if (querySnapshot.size == 0) {
+      const itemsNotFound = document.querySelector(".itemsNotFound");
+      const itemsDiv = document.querySelector(".itemsDiv");
+      itemsNotFound.style.display = "block";
+      itemsDiv.style.paddingBottom = "0";
+    };
+
     querySnapshot.docChanges().forEach((singleItem) => {
       if (singleItem.type === "removed") {
         let dItem = document.getElementById(singleItem.doc.id);

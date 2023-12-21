@@ -234,6 +234,13 @@ body {
     padding-bottom: 30px;
 }
 
+.itemsNotFound {
+    text-transform: capitalize;
+    text-align: center;
+    margin: 80px 0;
+    display: none;
+}
+
 .cardNameDiv h5 {
     font-family: 'Dancing Script', cursive;
     font-size: 24px;

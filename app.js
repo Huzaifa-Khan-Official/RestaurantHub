@@ -14,7 +14,7 @@ import {
   doc,
   query,
   deleteDoc,
-  where
+  where,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const auth = getAuth();
@@ -59,6 +59,25 @@ const getItems = () => {
         let dItem = document.getElementById(singleBusiness.doc.id);
         if (dItem) {
           dItem.remove();
+        }
+      } else if (singleBusiness.type === "modified") {
+        let updateBusiness = document.getElementById(singleBusiness.doc.id);
+        if (updateBusiness) {
+          updateBusiness.setAttribute("id", singleBusiness.doc.id);
+          const businessType = singleBusiness.doc.data().BusinessType;
+          const businessName = singleBusiness.doc.data().businessName;
+          const businessImg = singleBusiness.doc.data().businessImg;
+          const businessId = singleBusiness.doc.id;
+          updateBusiness.setAttribute("onclick", `selectRestaurant('${businessId}')`);
+          updateBusiness.innerHTML = `
+            <div class="restCardImgDiv">
+              <img src="${businessImg}" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" id="restName">${businessName}</h5>
+                <p class="card-text" id="restCateg">${businessType}</p>
+            </div>
+          `;
         }
       } else {
         const businessType = singleBusiness.doc.data().BusinessType;

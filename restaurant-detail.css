@@ -353,6 +353,61 @@ body {
     transition: all .3s;
 }
 
+
+
+@media (max-width: 260px) {
+    .cardImgDiv {
+        width: 150px;
+        height: 150px;
+        margin-top: 60px;
+    }
+
+    .restCardImgDiv {
+        height: 100px;
+    }
+
+    .ourRestHeadDiv h2,
+    .aboutDivHeading h2 {
+        font-size: 26px;
+        padding: 0 20px;
+        word-break: break-word;
+    }
+
+    .aboutDivHeading h2 {
+        padding: 0;
+    }
+
+    .cardOFFDiv h6 span {
+        font-size: 24px;
+    }
+
+
+}
+
+@media (max-width: 200px) {
+    .bannerHeadingDiv h1 {
+        font-size: 28px !important;
+    }
+
+    .navbar>.container-fluid {
+        justify-content: center;
+    }
+
+    .BusinessTypeDiv h3 {
+        font-size: 20px;
+    }
+
+    .bannerHeadingDiv {
+        padding-top: 40px !important;
+    }
+
+    .cardImgDiv {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+
 @media (max-width: 549px) {
     .nav-List {
         flex-direction: column;
@@ -363,11 +418,25 @@ body {
     .navbar {
         display: block;
     }
+
+    .bannerHeadingDiv h1 {
+        font-size: 42px;
+    }
 }
 
 @media (max-width: 640px) {
     .itemsDiv {
         padding: 0 20px;
+    }
+
+    .navbar {
+        display: block;
+        padding: 10px 20px;
+    }
+
+    .bannerHeadingDiv {
+        top: 20%;
+        padding: 20px;
     }
 }
 

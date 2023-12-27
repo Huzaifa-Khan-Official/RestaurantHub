@@ -55,12 +55,13 @@ sbtn.addEventListener("click", () => {
           ...userData, // setting array in a database
           userid: user.uid, // also user id in the database
         });
-        
+
         sbtn.innerHTML = "Signup";
 
         location.href = "../login/login.html";
       })
       .catch((error) => {
+        sbtn.innerHTML = "Signup";
         const errorCode = error.code;
         const errorMessage = errorCode.slice(5).toUpperCase();
         const errMessage = errorMessage.replace(/-/g, " ");

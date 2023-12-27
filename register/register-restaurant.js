@@ -47,7 +47,6 @@ let sbtn = document.querySelector("#sbtn"); // get signin btn
 let errorPara = document.querySelector("#errorPara"); // get error paragraph
 
 sbtn.addEventListener("click", () => {
-  
   sbtn.innerHTML = `
       <div class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
@@ -87,6 +86,8 @@ sbtn.addEventListener("click", () => {
         location.href = "./login-restaurant.html";
       })
       .catch((error) => {
+        sbtn.innerHTML = "Signup";
+
         const errorCode = error.code;
         const errorMessage = errorCode.slice(5).toUpperCase();
         const errMessage = errorMessage.replace(/-/g, " ");

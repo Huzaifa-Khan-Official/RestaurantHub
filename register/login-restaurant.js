@@ -40,7 +40,7 @@ lbtn.addEventListener("click", () => {
       const docSnap = await getDoc(docRef);
 
       lbtn.innerHTML = "Login";
-    
+
       if (docSnap.exists()) {
         localStorage.setItem("adminUid", adminUid);
         if (docSnap.data().status == false) {
@@ -61,6 +61,9 @@ lbtn.addEventListener("click", () => {
       }
     })
     .catch((error) => {
+      
+      lbtn.innerHTML = "Login";
+
       const errorCode = error.code;
       const errorMessage = errorCode.slice(5).toUpperCase();
       const errMessage = errorMessage.replace(/-/g, " ");

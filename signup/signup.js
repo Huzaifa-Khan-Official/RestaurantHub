@@ -24,6 +24,11 @@ let sbtn = document.querySelector("#sbtn"); // get signin btn
 let errorPara = document.querySelector("#errorPara"); // get error paragraph
 
 sbtn.addEventListener("click", () => {
+  sbtn.innerHTML = `
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+  `;
   let semail = document.querySelector("#semail"); // get email to signin user
   let spassword = document.querySelector("#spassword"); // get password to signin user
   let sname = document.querySelector("#sname"); // get name of a user
@@ -50,6 +55,9 @@ sbtn.addEventListener("click", () => {
           ...userData, // setting array in a database
           userid: user.uid, // also user id in the database
         });
+        
+        sbtn.innerHTML = "Signup";
+
         location.href = "../login/login.html";
       })
       .catch((error) => {

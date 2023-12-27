@@ -36,13 +36,22 @@ body {
     transition: all .5s;
 }
 
+#lbtn .spinner-border {
+    width: 20px;
+    height: 20px;
+}
+
 #lbtn:hover,
 #googleSignInBtn:hover {
     background-color: #ca8a01;
 
 }
 
-.form-control:focus {
+#lbtn:focus-visible {
+    box-shadow: none;
+}
+
+.form-control:focus  {
     box-shadow: 0 0 20px 0px #e69c00;
 }
 

@@ -61,7 +61,6 @@ lbtn.addEventListener("click", () => {
       }
     })
     .catch((error) => {
-      
       lbtn.innerHTML = "Login";
 
       const errorCode = error.code;
@@ -83,6 +82,12 @@ lpassword.addEventListener("keypress", (e) => {
 const googleSignInBtn = document.getElementById("googleSignInBtn");
 
 googleSignInBtn.addEventListener("click", () => {
+  googleSignInBtn.innerHTML = `
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  `;
+
   signInWithPopup(auth, provider)
     .then(async (result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -109,8 +114,20 @@ googleSignInBtn.addEventListener("click", () => {
       if (docSnap.exists()) {
         localStorage.setItem("adminUid", adminUid);
         if (docSnap.data().status === false) {
+
+          googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
           location.href = "./admin/restaurant-details.html";
         } else {
+          
+          googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
           location.href = "./admin/admin.html";
         }
       } else {
@@ -119,17 +136,38 @@ googleSignInBtn.addEventListener("click", () => {
 
         if (userDocSnap.exists()) {
           localStorage.setItem("userUid", adminUid);
+            
+          googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
           location.href = "../user/index.html";
         } else {
+            
+          googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
           location.href = "./register-restaurant.html";
         }
       }
     })
     .catch((error) => {
+        
+      googleSignInBtn.innerHTML = `
+      <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+      <div class="googleBtnPara">Login with Google</div>
+      `;
+      
       const errorCode = error.code;
-      const errorMessage = error.message;
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log(errorMessage);
+      const errorMessage = errorCode.slice(5).toUpperCase();
+      const errMessage = errorMessage.replace(/-/g, " ");
+      errorPara.innerText = errMessage;
+      setTimeout(() => {
+        errorPara.innerHTML = "";
+      }, 3000);
     });
 });
 

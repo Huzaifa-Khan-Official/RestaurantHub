@@ -47,11 +47,16 @@ body {
 
 }
 
+#googleSignInBtn .spinner-border {
+    width: 30px;
+    height: 30px;
+}
+
 #lbtn:focus-visible {
     box-shadow: none;
 }
 
-.form-control:focus  {
+.form-control:focus {
     box-shadow: 0 0 20px 0px #e69c00;
 }
 
@@ -67,12 +72,14 @@ body {
     text-align: center;
 }
 
-#alreadyAccountPara a, #forgetPassword a {
+#alreadyAccountPara a,
+#forgetPassword a {
     color: white;
     transition: all .3s;
 }
 
-#alreadyAccountPara a:hover, #forgetPassword a:hover {
+#alreadyAccountPara a:hover,
+#forgetPassword a:hover {
     color: #e69c00;
 }
 

@@ -41,6 +41,11 @@ body {
   height: 20px;
 }
 
+#googleSignInBtn .spinner-border {
+  width: 30px;
+  height: 30px;
+}
+
 #sbtn:hover,
 #googleSignInBtn:hover {
   background-color: #e69c00;

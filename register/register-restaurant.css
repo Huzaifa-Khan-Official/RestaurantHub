@@ -58,6 +58,11 @@ body {
 
 }
 
+#googleSignInBtn .spinner-border {
+    width: 30px;
+    height: 30px;
+}
+
 .form-control:focus,
 .form-select:focus {
     box-shadow: 0 0 20px 0px #e69c00;

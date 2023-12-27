@@ -25,7 +25,6 @@ let lbtn = document.querySelector("#lbtn"); // get login btn
 let errorPara = document.querySelector("#errorPara"); // get error paragraph
 
 lbtn.addEventListener("click", () => {
-  
   lbtn.innerHTML = `
           <div class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
@@ -77,6 +76,12 @@ lpassword.addEventListener("keypress", (e) => {
 const googleSignInBtn = document.getElementById("googleSignInBtn");
 
 googleSignInBtn.addEventListener("click", () => {
+  googleSignInBtn.innerHTML = `
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  `;
+
   signInWithPopup(auth, provider)
     .then(async (result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -92,6 +97,12 @@ googleSignInBtn.addEventListener("click", () => {
 
       if (docSnap.exists()) {
         localStorage.setItem("userUid", userUid);
+
+        googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
         location.href = "../user/index.html";
       } else {
         const adminRef = doc(db, "restaurants", userUid);
@@ -99,6 +110,12 @@ googleSignInBtn.addEventListener("click", () => {
 
         if (adminDocSnap.exists()) {
           localStorage.setItem("adminUid", userUid);
+
+          googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
           location.href = "../register/admin/admin.html";
         }
       }
@@ -116,13 +133,26 @@ googleSignInBtn.addEventListener("click", () => {
 
       localStorage.setItem("userUid", user.uid);
 
+      googleSignInBtn.innerHTML = `
+      <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+      <div class="googleBtnPara">Login with Google</div>
+      `;
+
       location.href = "../user/index.html";
     })
     .catch((error) => {
+      googleSignInBtn.innerHTML = `
+      <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+      <div class="googleBtnPara">Login with Google</div>
+      `;
+
       const errorCode = error.code;
-      const errorMessage = error.message;
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      console.log(errorMessage);
+      const errorMessage = errorCode.slice(5).toUpperCase();
+      const errMessage = errorMessage.replace(/-/g, " ");
+      errorPara.innerText = errMessage;
+      setTimeout(() => {
+        errorPara.innerHTML = "";
+      }, 3000);
     });
 });
 

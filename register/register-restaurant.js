@@ -108,6 +108,13 @@ spassword.addEventListener("keypress", (e) => {
 const googleSignInBtn = document.getElementById("googleSignInBtn");
 
 googleSignInBtn.addEventListener("click", () => {
+
+  googleSignInBtn.innerHTML = `
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  `;
+
   signInWithPopup(auth, provider)
     .then(async (result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -122,6 +129,12 @@ googleSignInBtn.addEventListener("click", () => {
 
       if (adminSnap.exists()) {
         localStorage.setItem("adminUid", adminUid);
+
+        googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
         location.href = "./admin/admin.html";
       } else {
         const userRef = doc(db, "users", adminUid);
@@ -129,6 +142,12 @@ googleSignInBtn.addEventListener("click", () => {
 
         if (userDocSnap.exists()) {
           localStorage.setItem("userUid", adminUid);
+
+          googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
           location.href = "../user/index.html";
         }
       }
@@ -152,29 +171,40 @@ googleSignInBtn.addEventListener("click", () => {
 
       if (docSnap.exists()) {
         if (docSnap.data().status == false) {
+
+          googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
           location.href = "./admin/restaurant-details.html";
         } else {
           location.href = "./admin/admin.html";
         }
       } else {
+        
+        googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+          `;
+
         location.href = "./admin/restaurant-details.html";
       }
     })
     .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
 
-      if (email) {
-        errorPara.innerText = email;
-        setTimeout(() => {
-          errorPara.innerHTML = "";
-        }, 3000);
-      }
+      googleSignInBtn.innerHTML = `
+          <div class="googleIcon"><img src="./googleIcon.png" alt=""></div>
+          <div class="googleBtnPara">Login with Google</div>
+      `;
+
+      const errorCode = error.code;
+      const errorMessage = errorCode.slice(5).toUpperCase();
+      const errMessage = errorMessage.replace(/-/g, " ");
+      errorPara.innerText = errMessage;
+      setTimeout(() => {
+        errorPara.innerHTML = "";
+      }, 3000);
     });
 });
 

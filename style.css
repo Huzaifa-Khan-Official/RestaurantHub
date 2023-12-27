@@ -53,8 +53,8 @@ body {
 }
 
 .crossIconDiv:hover {
+    border-color: #e69c00;
     background-color: #e69c00;
-    border: none;
 }
 
 .navbar {
@@ -277,6 +277,13 @@ body {
 
 .cardOFFDiv h6 span {
     font-size: 36px;
+}
+
+.loaderDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
 }
 
 /* ourRestaurent */

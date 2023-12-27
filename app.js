@@ -45,6 +45,8 @@ onAuthStateChanged(auth, async (user) => {
 const crossIconDiv = document.querySelector(".crossIconDiv");
 const growBusinessDiv = document.querySelector(".growBusinessDiv");
 const ourRestCards = document.querySelector(".ourRestCards");
+const loaderDiv = document.querySelector(".loaderDiv");
+loaderDiv.style.display = "flex";
 
 crossIconDiv.addEventListener("click", () => {
   growBusinessDiv.style.display = "none";
@@ -68,7 +70,10 @@ const getItems = () => {
           const businessName = singleBusiness.doc.data().businessName;
           const businessImg = singleBusiness.doc.data().businessImg;
           const businessId = singleBusiness.doc.id;
-          updateBusiness.setAttribute("onclick", `selectRestaurant('${businessId}')`);
+          updateBusiness.setAttribute(
+            "onclick",
+            `selectRestaurant('${businessId}')`
+          );
           updateBusiness.innerHTML = `
             <div class="restCardImgDiv">
               <img src="${businessImg}" class="card-img-top" alt="...">
@@ -84,6 +89,8 @@ const getItems = () => {
         const businessName = singleBusiness.doc.data().businessName;
         const businessImg = singleBusiness.doc.data().businessImg;
         const businessId = singleBusiness.doc.id;
+
+        loaderDiv.style.display = "none";
 
         ourRestCards.innerHTML += `
         <div class="card col-lg-3 col-md-6 col-12" style="width: 18rem;" id="${businessId}" onclick="selectRestaurant('${businessId}')">

@@ -13,7 +13,7 @@ import {
   doc,
   query,
   deleteDoc,
-  where
+  where,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const auth = getAuth();
@@ -39,6 +39,8 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 const ourRestCards = document.querySelector(".ourRestCards");
+const loaderDiv = document.querySelector(".loaderDiv");
+loaderDiv.style.display = "flex";
 
 const getItems = () => {
   const restaurantsRef = collection(db, `restaurants/`);
@@ -50,11 +52,35 @@ const getItems = () => {
         if (dItem) {
           dItem.remove();
         }
+      } else if (singleBusiness.type === "modified") {
+        let updateBusiness = document.getElementById(singleBusiness.doc.id);
+        if (updateBusiness) {
+          updateBusiness.setAttribute("id", singleBusiness.doc.id);
+          const businessType = singleBusiness.doc.data().BusinessType;
+          const businessName = singleBusiness.doc.data().businessName;
+          const businessImg = singleBusiness.doc.data().businessImg;
+          const businessId = singleBusiness.doc.id;
+          updateBusiness.setAttribute(
+            "onclick",
+            `selectRestaurant('${businessId}')`
+          );
+          updateBusiness.innerHTML = `
+            <div class="restCardImgDiv">
+              <img src="${businessImg}" class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title" id="restName">${businessName}</h5>
+                <p class="card-text" id="restCateg">${businessType}</p>
+            </div>
+          `;
+        }
       } else {
         const businessType = singleBusiness.doc.data().BusinessType;
         const businessName = singleBusiness.doc.data().businessName;
         const businessImg = singleBusiness.doc.data().businessImg;
         const businessId = singleBusiness.doc.id;
+        
+        loaderDiv.style.display = "none";
 
         ourRestCards.innerHTML += `
         <div class="card col-lg-3 col-md-6 col-12" style="width: 18rem;" id="${businessId}" onclick="selectRestaurant('${businessId}')">

@@ -241,6 +241,13 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
+.loaderDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
 /* aboutDiv */
 .aboutDiv {
     background-color: #14171c;
